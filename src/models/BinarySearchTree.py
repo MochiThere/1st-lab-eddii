@@ -1,6 +1,7 @@
 from typing import Any, Optional, Tuple
 from Node import Node
 from BinaryTree import BinaryTree
+from Movie import Movie
 
 class BinarySearchTree (BinaryTree):
     def __init__ (self, root: Optional[Node] = None) -> None:
@@ -88,14 +89,14 @@ class BinarySearchTree (BinaryTree):
             return True
         return False         
             
-    def predecesor(self, node: Node) -> list[Node, Node, Node]:
+    def predecesor(self, node) :
         pred: Node = node.left
         pred_parent: Node = node
         while (pred.right is not None):
             pred, pred_parent = pred.right, pred
         return pred, pred_parent, pred.left
             
-    def sucesor(self, node: Node) -> list[Node, Node, Node]:
+    def sucesor(self, node):
         sus: Node = node.right
         sus_parent: Node = node
         while (sus.left is not None):
