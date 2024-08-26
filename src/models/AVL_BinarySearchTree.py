@@ -22,23 +22,31 @@ class AVL_BinarySearchTree (BinarySearchTree):
     
     def rebalance (self, node: Node) -> None:
         parent: Optional[Node] = super().search(node.data)[1]
+        pointer: Node = node
+        aux: Node = None
         while (parent is not None):
-            parent.balance = self.calculate_balance(parent)
-            print("parent: ")
-            print(parent.data)
-            print(parent.balance)
-            if parent.balance == 2 or parent.balance == -2:
-                if parent.balance == 2 and parent.right.balance == 1:
-                    self.simple_left_rotation(parent)
-                elif parent.balance == -2 and parent.left.balance == -1:
-                    self.simple_right_rotation(parent)
-                elif parent.balance == 2 and parent.right.balance == -1:
-                    self.double_right_left_rotation(parent)
-                elif parent.balance == -2 and parent.left.balance == 1:
-                    self.double_left_right_rotation(parent)
+            pointer = parent
+            parent = self.search(pointer.data)[1]
+            pointer.balance = self.calculate_balance(pointer)
+            parent = self.search(pointer.data)[1]
+            if pointer.balance == 2 or pointer.balance == -2:
+                if pointer.balance == 2 and self.calculate_balance(pointer.right) == 1:
+                    aux = self.simple_left_rotation(pointer)
+                elif pointer.balance == -2 and self.calculate_balance(pointer.left) == -1:
+                    aux = self.simple_right_rotation(pointer)
+                elif pointer.balance == 2 and self.calculate_balance(pointer.right) == -1:
+                    aux = self.double_right_left_rotation(pointer)
+                elif pointer.balance == -2 and self.calculate_balance(pointer.left) == 1:
+                    aux = self.double_left_right_rotation(pointer)
                 else:
-                    self.simple_left_rotation(parent)
-            parent = self.search(parent.data)[1]
+                    aux = self.simple_left_rotation(pointer)
+                if parent is None:
+                    self.root = aux
+                elif(parent.right == pointer):
+                    parent.right = aux
+                else:
+                    parent.left = aux
+            
     
     def calculate_balance (self, node: Node) -> int:
         return super().height(node.right) - super().height(node.left)
@@ -70,18 +78,9 @@ class AVL_BinarySearchTree (BinarySearchTree):
 print("-----Sample tree vacio-----")
 sample_tree = AVL_BinarySearchTree()
 print(sample_tree.root)
-print("-----Insertar 5-----")
-print(sample_tree.insert(5))
-sample_tree.postorder(sample_tree.root)
-print()
-print("-----Insertar 15-----")
-print(sample_tree.insert(15))
-sample_tree.postorder(sample_tree.root)
-print()
-print("-----Insertar 10-----")
-print(sample_tree.insert(10))
-sample_tree.postorder(sample_tree.root)
-print()
-print("-----Insertar 7-----")
-print(sample_tree.insert(7))
-sample_tree.postorder(sample_tree.root)
+elements = [5,8,16,19,28,33,36,45,51,57,59,65,68,75,85,100]
+for i in elements:
+    print("-----insert " + str(i) + "-----")
+    print(sample_tree.insert(i))
+    sample_tree.by_levels()
+    print()

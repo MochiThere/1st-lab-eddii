@@ -25,18 +25,18 @@ class BinaryTree:
             self.postorder(node.right)
             print(node.data, end = " ")
             
-    def by_levels(self, root: Optional[Node]) -> None:
-        queue = Queue()
-        pointer = root
-        queue.put(pointer)
-        while(queue.not_empty):
-            pointer = queue.get()
+    def by_levels(self ) -> None:
+        queue = []
+        pointer: Node = self.root
+        queue.append(pointer)
+        while(len(queue) > 0):
+            pointer = queue.pop(0)
             print(pointer.data, end = " ")
             if pointer.left is not None:
-                queue.put(pointer.left)
+                queue.append(pointer.left)
             if pointer.right is not None:
-                queue.put(pointer.right)
-    
+                queue.append(pointer.right)
+        
     def height (self, node: Optional[Node]) -> int:
         if node is None:
             return 0
