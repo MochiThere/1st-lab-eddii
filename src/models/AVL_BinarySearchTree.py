@@ -17,7 +17,7 @@ class AVL_BinarySearchTree (BinarySearchTree):
     def delete(self, element: Any) -> bool:
         state: bool =  super().delete(element)
         if state is True: 
-            self.rebalance(self.search(element)[0])
+            self.rebalance(self.search(element)[1])
         return state
     
     def rebalance (self, node: Node) -> None:
@@ -39,6 +39,7 @@ class AVL_BinarySearchTree (BinarySearchTree):
                 elif pointer.balance == -2 and self.calculate_balance(pointer.left) == 1:
                     aux = self.double_left_right_rotation(pointer)
                 else:
+                    print("caso borde")
                     aux = self.simple_left_rotation(pointer)
                 if parent is None:
                     self.root = aux
@@ -52,26 +53,22 @@ class AVL_BinarySearchTree (BinarySearchTree):
         return super().height(node.right) - super().height(node.left)
     
     def simple_left_rotation (self, node: Node) -> Node:
-        print("slr")
         aux: Node = node.right
         node.right = aux.left
         aux.left = node
         return aux
     
     def simple_right_rotation (self, node: Node) -> Node:
-        print("srr")
         aux: Node = node.left
         node.left = aux.right
         aux.right = node
         return aux
     
     def double_left_right_rotation (self, node: Node) -> Node:
-        print("dlrr")
         node.left = self.simple_left_rotation(node.left)
         return self.simple_right_rotation(node)
     
     def double_right_left_rotation (self, node: Node) -> Node:
-        print("drlr")
         node.right = self.simple_right_rotation(node.right)
         return self.simple_left_rotation(node)
 
@@ -82,5 +79,12 @@ elements = [5,8,16,19,28,33,36,45,51,57,59,65,68,75,85,100]
 for i in elements:
     print("-----insert " + str(i) + "-----")
     print(sample_tree.insert(i))
+    sample_tree.by_levels()
+    print()
+    
+deletes = [5,8,19,28,45,59,65,68,100]
+for i in deletes:
+    print("-----delete " + str(i) + "-----")
+    print(sample_tree.delete(i))
     sample_tree.by_levels()
     print()
