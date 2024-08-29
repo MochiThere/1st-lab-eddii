@@ -1,43 +1,46 @@
 from queue import Queue
-from typing import Any, Optional, Tuple
-from .Node import Node
+from typing import Any, Optional
+from Node import Node
 
 class BinaryTree:
+    
+    size: int = 0
     
     def __init__(self, root: Optional[Node] = None) -> None:
         self.root = root
     
     def preorder(self, node: Node) -> None:
         if (node is not None):
-            print(node.data, end = " ")
-            self.preorden_r(node.left)
-            self.preorden_r(node.right)
+            print(node.key, end = " ")
+            self.preorder(node.left)
+            self.preorder(node.right)
             
     def inorder(self, node: Node) -> None:
         if (node is not None):
-            self.inorden_r(node.left)
-            print(node.data, end = " ")
-            self.inorden_r(node.right)
+            self.inorder(node.left)
+            print(node.key, end = " ")
+            self.inorder(node.right)
                 
-    def posorder(self, node: Node) -> None:
+    def postorder(self, node: Node) -> None:
         if node is not None:
-            self.posorden_r(node.left)
-            self.posorden_r(node.right)
-            print(node.data, end = " ")
+            self.postorder(node.left)
+            self.postorder(node.right)
+            print(node.key, end = " ")
             
-    def by_levels(self, root: Optional[Node]) -> None:
-        queue = Queue()
-        pointer = root
-        queue.put(pointer)
-        while(queue.not_empty):
-            pointer = queue.get()
-            print(pointer.data, end = " ")
+    def by_levels(self ) -> None:
+        queue = []
+        pointer: Node = self.root
+        queue.append(pointer)
+        while(len(queue) > 0):
+            pointer = queue.pop(0)
+            print(pointer.key, end = " ")
             if pointer.left is not None:
-                queue.put(pointer.left)
+                queue.append(pointer.left)
             if pointer.right is not None:
-                queue.put(pointer.right)
-            
+                queue.append(pointer.right)
+        
     def height (self, node: Optional[Node]) -> int:
         if node is None:
             return 0
-        return (1 + max(self.altura_de_un_arbol_r(node.left), self.altura_de_un_arbol_r(node.right)))
+        return (1 + max(self.height(node.left), self.height(node.right)))
+    
