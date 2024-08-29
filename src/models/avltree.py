@@ -3,8 +3,9 @@ from .node import Node
 
 class AVLTree():
 
-    def __init__(self, root:Node= None) -> None:
+    def __init__(self, root: Node = None) -> None:
         self.root = root
+        
     
     # Operaciones básicas ============================================
     
@@ -208,3 +209,8 @@ class AVLTree():
                 queue.append(tmp.right)
             
             self.levels( None, queue )
+
+    # Metodos externos ==================================================
+    def generate_csv_tree(self) -> Node:
+        root 
+        return root
