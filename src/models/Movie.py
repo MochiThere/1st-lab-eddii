@@ -1,5 +1,4 @@
-from typing import Any, Optional
-class Movie():
+class Movie:
     def __init__(self, title: str, wwe: float, dome: float, dompe: float, fore: float, forpe: float, year: int):
         self.title: str = title
         self.wwide_earnings: float = wwe
