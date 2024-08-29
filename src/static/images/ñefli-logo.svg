@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1280"
+   height="1280"
+   viewBox="0 0 338.66666 338.66666"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs1"><linearGradient
+       id="linearGradient14"><stop
+         style="stop-color:#6b0017;stop-opacity:1;"
+         offset="0"
+         id="stop14" /><stop
+         style="stop-color:#c10011;stop-opacity:1;"
+         offset="1"
+         id="stop15" /></linearGradient><linearGradient
+       id="swatch10"><stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop10" /></linearGradient><radialGradient
+       xlink:href="#linearGradient14"
+       id="radialGradient15"
+       cx="175.92555"
+       cy="175.79529"
+       fx="175.92555"
+       fy="175.79529"
+       r="58.048161"
+       gradientTransform="matrix(-0.52749059,0.10068128,-0.49182821,-2.5767921,350.12667,587.46847)"
+       gradientUnits="userSpaceOnUse" /></defs><g
+     id="layer2"
+     transform="translate(0.59925333,23.396079)"><path
+       id="rect10"
+       style="opacity:1;fill:url(#radialGradient15);fill-opacity:1;fill-rule:nonzero;stroke-width:0.264999"
+       d="m 112.16664,64.976355 40.79564,-0.259938 1.03543,206.183243 -43.41437,2.49907 z m 114.51302,0.291613 -40.66059,-0.07332 -1.67166,205.354912 42.26971,3.39015 z" /><path
+       id="rect11"
+       style="opacity:1;fill:#e60014;fill-opacity:1;stroke-width:0.264999"
+       d="m 112.02442,64.970084 40.94577,-0.220145 73.67206,209.166791 -42.19781,-3.40307 z" /><path
+       id="rect16"
+       style="opacity:1;fill:#e60014;stroke-width:0.32519"
+       d="m 112.02442,25.576463 c 0,0 17.46703,-7.47902 26.73342,-7.638552 10.54274,-0.181506 30.69678,7.638552 30.69678,7.638552 0,0 19.17602,5.019779 28.9785,5.004568 9.62948,-0.01494 28.4517,-5.004568 28.4517,-5.004568 v 30.635508 c 0,0 -18.00347,4.900269 -27.23234,5.004568 -10.52603,0.11896 -31.18103,-5.004568 -31.18103,-5.004568 0,0 -18.92384,-7.69717 -28.88202,-7.638552 -9.53443,0.05612 -27.56501,7.638552 -27.56501,7.638552 z" /></g></svg>
