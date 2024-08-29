@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ñetflix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="list-profiles-container">
+        <div class="list-profiles">
+            <h1>¿Quién quiere ver algo?</h1>
+            <ul class="profile-container">
+                <li class="profile">
+                    <div class="icon-wrapper">
+                        <img src="../../static/images/Netflix-avatar.png" alt="icon-img" class="avatar" onclick="changeTo()">
+                        <h1 class="profile-name">ion</h1>
+                    </div>
+                </li>
+                <li class="profile">
+                    <div class="icon-wrapper">
+                        <img src="../../static/images/Netflix-avatar.png" alt="icon-img" class="avatar" onclick="changeTo()" >
+                        <h1 class="profile-name">carlo</h1>
+                    </div>
+                </li>
+                <li class="profile">
+                    <div class="icon-wrapper">
+                        <img src="../../static/images/Netflix-avatar.png" alt="icon-img" class="avatar" onclick="changeTo()">
+                        <h1 class="profile-name">sam</h1>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="movie-container" hidden>
+        <h1 id="movie-name">Template text</h1>
+        <img alt="movie-poster" id="poster">
+    </div>
+
+    <script src="../index.js"></script>
+</body>
+</html>
