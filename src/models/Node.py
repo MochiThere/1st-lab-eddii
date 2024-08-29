@@ -1,11 +1,12 @@
-from typing import Optional
+from .movie import Movie
 
 class Node:
 
-    def __init__(self, data: Optional[str] = None) -> None:
+    def __init__(self, data: Movie= None) -> None:
+        self.key: str = data.title
         self.data = data
-        self.left = None
-        self.right = None
-        self.balance = 0
+        self.left: Node = None
+        self.right: Node = None
+        self.balance: int = 0
         
         

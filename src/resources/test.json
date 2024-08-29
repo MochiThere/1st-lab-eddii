@@ -1,0 +1,53 @@
+{
+    "root": {
+      "data": "102 Dálmatas",
+      "balance": 0,
+      "left": {
+        "data": 30,
+        "balance": 0,
+        "left": {
+          "data": 20,
+          "balance": 0,
+          "left": null,
+          "right": null
+        },
+        "right": {
+          "data": 40,
+          "balance": 0,
+          "left": null,
+          "right": null
+        }
+      },
+      "right": {
+        "data": 70,
+        "balance": 0,
+        "left": {
+          "data": 60,
+          "balance": 0,
+          "left": {
+            "data": 60,
+            "balance": 0,
+            "left": null,
+            "right": null
+            },
+          "right": null
+        },
+        "right": {
+          "data": 80,
+          "balance": -1,
+          "left": {
+            "data": 75,
+            "balance": 0,
+            "left": null,
+            "right": null
+          },
+          "right": {
+            "data": 90,
+            "balance": 0,
+            "left": null,
+            "right": null
+          }
+        }
+      }
+    }
+  }
