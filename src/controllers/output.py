@@ -5,5 +5,5 @@ data = {
     "wwe":"bby"
 }
 
-with open('src/views/test/data.json','w') as json_file:
+with open('src/resources/data.json','w') as json_file:
     json.dump(data, json_file)

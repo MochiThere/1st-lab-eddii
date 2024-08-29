@@ -37,6 +37,10 @@ function toProfiles(){
     window.location.href = '../profiles/profiles.html';
 }
 
+function toMyList(){
+    window.location.href = '../my-list/my-list.html';
+}
+
 // ========================================================================
 const carousel = document.querySelector('.carousel');
 const prevButton = document.querySelector('.prev');
