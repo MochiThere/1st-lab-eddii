@@ -3,8 +3,9 @@ from .node import Node
 
 class AVLTree():
 
-    def __init__(self, root:Node= None) -> None:
+    def __init__(self, root: Node = None) -> None:
         self.root = root
+        
     
     # Operaciones básicas ============================================
     
@@ -197,9 +198,9 @@ class AVLTree():
         if node is not None:
             queue.append(node)
         
-        if len(queue) > 0 :
+        if len(queue) > 0:
             tmp = queue.pop(0)
-            print(tmp.data)
+            print(tmp.key, end = " ")
 
             if tmp.left is not None:
                 queue.append(tmp.left)
@@ -341,3 +342,30 @@ class AVLTree():
             "left": self.__dict(node.left),
             "right": self.__dict(node.right)
         }
+    # Metodos externos ==================================================
+    
+    #Retorna los n primeros nodos en un recorrido por niveles.
+    def head(self, n:int = 10) -> list[Node]:
+
+        out = []
+
+        if self.root is None:
+            return out
+        
+        out.append(self.root)
+        i = 0
+        while( len(out) < n ):
+
+            #Se realiza un recorrido por niveles iterativo, 
+            #pero antes de añadir un nodo a la cola se verifica el tamaño de out[].
+            if out[i].left is not None and len(out) < n:
+                out.append(out[i].left)
+            if out[i].right is not None and len(out) < n:
+                out.append(out[i].right)
+            i += 1
+
+            if i >= len(out):
+                break
+
+        
+        return out

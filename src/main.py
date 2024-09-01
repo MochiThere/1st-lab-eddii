@@ -15,6 +15,3 @@ if __name__ == '__main__':
     print(arbolito.filter_by("year:2020 OR min:164200000"))
     
     tree_to_json(arbolito)
-    
-    
-    
