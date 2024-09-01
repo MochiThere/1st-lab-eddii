@@ -1,5 +1,0 @@
-print("Hola mundo, yo tmb soy un paquete")
-from csv_manager import Csv_manager
-from models.node import Node
-from models.avltree import AVLTree
-from models.movie import Movie
