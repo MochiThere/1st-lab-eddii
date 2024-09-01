@@ -11,8 +11,25 @@
     <div class="main-container">
         <header class="main-header">
             <img class="ñetflix-logo" src="../../static/images/logo.png" alt="logo"> 
-            <a class="go-back" href="../main-page/main-page.html"><</a>
+            <a class="go-back" href="../main-page/main-page.html"></a>
             <h2>Mi Lista</h2>
+            <div class="dd-container">
+                <input type="text" placeholder="Buscar y Filtrar" id="search-input" autocomplete="off">
+                <div class="dropdown-list">
+                    <p id="dd-lbl">Flairs Populares</p>
+                    <ul>
+                        <li>
+                            <p><span class="bubble">year:</span><span> Buscar una película por su año de estreno </span></p>
+                        </li>
+                        <li>
+                            <p><span class="bubble">loved:</span><span> Muestra los resultados amados en Colombia </span></p>
+                        </li>
+                        <li>
+                            <p><span class="bubble">min:</span><span> Películas por encima del ingreso internacional especificado </span></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </header>
         <div class="draggable">
             <div class="tree-container">
