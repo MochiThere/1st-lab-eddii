@@ -1,6 +1,9 @@
 const draggable = document.querySelector('.draggable');
 const content = document.querySelector('.tree-container');
 
+const searchInput = document.getElementById("search-input")
+const dropdownList = document.querySelector('.dropdown-list');
+
 let isDragging = false;
 let initial = { x: 0, y: 0 };
 let offset = { x: 0, y: 0 };
@@ -43,6 +46,30 @@ content.addEventListener('wheel', (e) => {
 
     content.style.transform = `scale(${scale})`;
 });
+
+document.addEventListener('click', function(event) {
+    if (!dropdownList.contains(event.target) && event.target !== searchInput) {
+      dropdownList.style.display = 'none';
+    }
+  });
+
+searchInput.addEventListener('focus', () => {
+    dropdownList.style.display = 'block';
+});
+
+const options = document.querySelectorAll('.dropdown-list ul li');
+options.forEach(option => {
+  option.addEventListener('click', function() {
+    const bubbleText = this.querySelector('.bubble').textContent.trim();
+    
+    const keyword = bubbleText.split(':')[0].trim() + ":";
+    
+    searchInput.value = searchInput.value + keyword;
+    
+    dropdownList.style.display = 'none';
+  });
+});
+
 
 async function loadTreeFromJSON () {
     try {
