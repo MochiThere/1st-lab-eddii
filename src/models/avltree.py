@@ -209,7 +209,139 @@ class AVLTree():
                 queue.append(tmp.right)
             
             self.levels( None, queue )
+            
+    # Utilidades ======================================================
 
+    def test_tree(self):
+        movies = [
+            Movie("Mission: Impossible II", 546388108, 215409889, 39.4, 330978219, 60.6, 2000),
+            Movie("Gladiator", 460583960, 187705427, 40.8, 272878533, 59.2, 2000),
+            Movie("Cast Away", 429632142, 233632142, 54.4, 196000000, 45.6, 2000),
+            Movie("What Women Want", 374111707, 182811707, 48.9, 191300000, 51.1, 2020),
+            Movie("Dinosaur", 349822765, 137748063, 39.4, 212074702, 60.6, 2000),
+            Movie("How the Grinch Stole Christmas", 345842198, 260745620, 75.4, 85096578, 24.6, 2000),
+            Movie("Meet the Parents", 330444045, 166244045, 50.3, 164200000, 49.7, 2010),
+            Movie("The Perfect Storm", 328718434, 182618434, 55.6, 146100000, 44.4, 2021),
+            Movie("X-Men", 296339528, 157299718, 53.1, 139039810, 46.9, 2000),
+            Movie("What Lies Beneath", 291420351, 155464351, 53.3, 135956000, 46.7, 2011),
+        ]
+        
+        for movie in movies:
+            self.insert(movie)
+        return self
+    
+    def filter_by(self, flairs: str) :
+        if " OR AND " in flairs or " AND OR " in flairs:
+            print('Que te pasa animal')
+            return []
+
+        spec_year: int = None
+        spec_min_income: float = None
+        
+        # Extraer los datos desde los flairs
+        try:
+            if "year:" in flairs:
+                spec_year = int(flairs.split("year:")[1].split()[0])
+
+            if "min:" in flairs:
+                spec_min_income = float(flairs.split("min:")[1].split()[0])
+                
+        except ValueError:
+            print("Not found or bad input")
+            return []
+
+        if "loved:true" in flairs:
+            loved = True
+        elif "loved:false" in flairs:
+            loved = False
+        else:
+            loved = None
+        
+        # Inicializar el arbol con los noditos filtrados
+        filtered_tree = AVLTree()
+        
+        # Funcion (dentro de funcion wiii) para filtrar nodos 💫 r e c u r s i v a m e n t e 💫
+        def _filter_nodes(node):
+            if node is None:
+                return None
+
+            # Extraer la informacion del nodo
+            m_year = node.data.year
+            m_income = node.data.foreign_earnings
+            m_loved = node.data.domestic_percent_earnings >= node.data.foreign_percent_earnings
+            
+            # Evaluar condiciones
+            year_chk = (spec_year is None or m_year >= spec_year)
+            income_chk = (spec_min_income is None or m_income >= spec_min_income)
+            loved_chk = True if loved is None else (m_loved == loved)
+            
+            # Aplicar la lógica para operandos OR y AND  
+            if " OR " in flairs:
+                if year_chk or income_chk and loved_chk:
+                    filtered_tree.insert(node.data)
+            elif " AND " in flairs:
+                if year_chk and income_chk and loved_chk:
+                    filtered_tree.insert(node.data)
+                    
+            # En caso tal no se especifique o no se encuentre un operando 
+            else:
+                if year_chk and spec_year is not None:
+                    filtered_tree.insert(node.data)
+                elif income_chk and spec_min_income is not None:
+                    filtered_tree.insert(node.data)
+                elif loved_chk and loved is not None:
+                    filtered_tree.insert(node.data)
+                    
+            # Llamado para subarboles izq y der
+            _filter_nodes(node.left)
+            _filter_nodes(node.right)
+            
+        # Ejecutar el primer recorrido
+        _filter_nodes(self.root)
+        
+        return filtered_tree
+      
+    def __repr__(self):
+        return self.__print_tree(self.root)
+
+    def __print_tree(self, node, level=0, side="root"):
+        if node is None:
+            return ""
+        
+        indent = " " * 4 * level
+
+        # Define colors
+        color_reset = "\033[0m"
+        color_root = "\033[1;32m"    
+        color_left = "\033[1;34m"    
+        color_right = "\033[1;31m"   
+        color_title = "\033[1;37m"   
+
+        if side == "root":
+            result = f"{indent}{color_root}(root){color_reset} -> {color_title}{node.data.title}{color_reset}\n"
+        elif side == "left":
+            result = f"{indent}{color_left}(left){color_reset} -> {color_title}{node.data.title}{color_reset}\n"
+        else:  # right
+            result = f"{indent}{color_right}(right){color_reset} -> {color_title}{node.data.title}{color_reset}\n"
+        
+        result += self.__print_tree(node.left, level + 1, "left")
+        result += self.__print_tree(node.right, level + 1, "right")
+        
+        return result
+    
+    def to_dict(self):
+        return {"root": self.__dict(self.root)}
+    
+    def __dict(self, node:Node):
+        if node is None:
+            return None
+        
+        return {
+            "data": node.data.title,
+            "balance": node.balance,
+            "left": self.__dict(node.left),
+            "right": self.__dict(node.right)
+        }
     # Metodos externos ==================================================
     
     #Retorna los n primeros nodos en un recorrido por niveles.
@@ -237,8 +369,3 @@ class AVLTree():
 
         
         return out
-            
-            
-
-
-

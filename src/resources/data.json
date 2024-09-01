@@ -1,0 +1,53 @@
+{
+    "root": {
+        "data": "Mission: Impossible II",
+        "balance": 1,
+        "left": {
+            "data": "Gladiator",
+            "balance": 2,
+            "left": {
+                "data": "Cast Away",
+                "balance": 1,
+                "left": null,
+                "right": {
+                    "data": "Dinosaur",
+                    "balance": 0,
+                    "left": null,
+                    "right": null
+                }
+            },
+            "right": {
+                "data": "How the Grinch Stole Christmas",
+                "balance": 1,
+                "left": null,
+                "right": {
+                    "data": "Meet the Parents",
+                    "balance": 0,
+                    "left": null,
+                    "right": null
+                }
+            }
+        },
+        "right": {
+            "data": "What Women Want",
+            "balance": -1,
+            "left": {
+                "data": "The Perfect Storm",
+                "balance": 1,
+                "left": null,
+                "right": {
+                    "data": "What Lies Beneath",
+                    "balance": 0,
+                    "left": null,
+                    "right": null
+                }
+            },
+            "right": {
+                "data": "X-Men",
+                "balance": 0,
+                "left": null,
+                "right": null
+            }
+        }
+    }
+}

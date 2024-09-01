@@ -47,7 +47,7 @@ content.addEventListener('wheel', (e) => {
 async function loadTreeFromJSON () {
     try {
         // Leer el archivo JSON 
-        const res = await fetch('../../resources/test.json');
+        const res = await fetch('../../resources/data.json');
 
         // Si no se puede cargar; mandar error
         if (!res.ok) {
