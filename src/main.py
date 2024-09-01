@@ -1,4 +1,5 @@
 from models import *
+from controllers import *
 
 if __name__ == '__main__':
     arbolito = AVLTree().test_tree()
@@ -12,4 +13,8 @@ if __name__ == '__main__':
     print(arbolito.filter_by("year:2020 AND min:164200000"))
     print("============== Arbol uno u ambos criterios ===========", end="\n\n")
     print(arbolito.filter_by("year:2020 OR min:164200000"))
+    
+    tree_to_json(arbolito)
+    
+    
     

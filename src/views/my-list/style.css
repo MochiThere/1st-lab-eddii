@@ -119,10 +119,12 @@ html, body {
 
 .node.node--left {
     margin-right: 4rem;
+    width: max-content;
 }
 
 .node.node--right {
     margin-left: 4rem;
+    width: max-content;
 }
 
 .node__element {

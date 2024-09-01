@@ -208,7 +208,9 @@ class AVLTree():
                 queue.append(tmp.right)
             
             self.levels( None, queue )
-    
+            
+    # Utilidades ======================================================
+
     def test_tree(self):
         movies = [
             Movie("Mission: Impossible II", 546388108, 215409889, 39.4, 330978219, 60.6, 2000),
@@ -226,7 +228,6 @@ class AVLTree():
         for movie in movies:
             self.insert(movie)
         return self
-    
     
     def filter_by(self, flairs: str) :
         if " OR AND " in flairs or " AND OR " in flairs:
@@ -290,8 +291,6 @@ class AVLTree():
                 elif loved_chk and loved is not None:
                     filtered_tree.insert(node.data)
                     
-                
-                    
             # Llamado para subarboles izq y der
             _filter_nodes(node.left)
             _filter_nodes(node.right)
@@ -300,13 +299,11 @@ class AVLTree():
         _filter_nodes(self.root)
         
         return filtered_tree
-
-            
+      
     def __repr__(self):
-        return self._print_tree(self.root)
+        return self.__print_tree(self.root)
 
-    
-    def _print_tree(self, node, level=0, side="root"):
+    def __print_tree(self, node, level=0, side="root"):
         if node is None:
             return ""
         
@@ -326,7 +323,21 @@ class AVLTree():
         else:  # right
             result = f"{indent}{color_right}(right){color_reset} -> {color_title}{node.data.title}{color_reset}\n"
         
-        result += self._print_tree(node.left, level + 1, "left")
-        result += self._print_tree(node.right, level + 1, "right")
+        result += self.__print_tree(node.left, level + 1, "left")
+        result += self.__print_tree(node.right, level + 1, "right")
         
         return result
+    
+    def to_dict(self):
+        return {"root": self.__dict(self.root)}
+    
+    def __dict(self, node:Node):
+        if node is None:
+            return None
+        
+        return {
+            "data": node.data.title,
+            "balance": node.balance,
+            "left": self.__dict(node.left),
+            "right": self.__dict(node.right)
+        }
