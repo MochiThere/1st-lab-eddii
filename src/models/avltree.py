@@ -364,28 +364,30 @@ class AVLTree():
     
     # Metodos externos ==================================================
     
-    #Retorna los n primeros nodos en un recorrido por niveles.
-    def head(self, n:int = 10) -> list[Node]:
+    #Retorna los n primeros nodos en un recorrido por niveles como otro arbol AVL
+    def head(self, n:int = 10):
 
-        out = []
-
+        out:AVLTree = AVLTree()
+        
         if self.root is None:
             return out
         
-        out.append(self.root)
-        i = 0
-        while( len(out) < n ):
+        tree_size:int = self.height(self.root)
+        
+        #produced tree cant be larger than current tree, obviously
+        if n > tree_size: n = tree_size
+        
+        out.insert(self.root)
+                
+        for i in n:
 
             #Se realiza un recorrido por niveles iterativo, 
-            #pero antes de añadir un nodo a la cola se verifica el tamaño de out[].
-            if out[i].left is not None and len(out) < n:
-                out.append(out[i].left)
-            if out[i].right is not None and len(out) < n:
-                out.append(out[i].right)
-            i += 1
-
-            if i >= len(out):
-                break
-
+            #revisando la altura del arbol cada que se añade un nodo
+            if out[i].left is not None and out.height(out.root) < n:
+                out.insert(out[i].left)
+            if out[i].right is not None and out.height(out.root) < n:
+                out.insert(out[i].right)
+                
+            #TODO: si en cada ciclo se añaden a lo más 2 elementos, van a sobrar ciclos. lol!!!!!
         
         return out
