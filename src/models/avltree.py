@@ -91,6 +91,25 @@ class AVLTree():
         if node is None:
             return 0
         return (1 + max(self.height(node.left), self.height(node.right)))
+    
+    #Retorna el nivel de un nodo trazando el camino desde su ubicación hasta la raiz, 
+    #devolviendo la longitud de ese camino.
+    def level(self, node:Node) -> int:
+        lookup:tuple = self.search(node.key) if node else (None, None) #awful
+        
+        if(lookup[0] is None): #If node isnt in tree return -1 
+            return -1
+        
+        lookat:Node = lookup[1]
+        path:list[Node] = []
+        
+        while(lookat is not None): #Keep tracing node path until root is reached
+            path.append(lookat)
+            lookat = self.search(lookat.key)[1]
+        
+        return len(path)+1
+        
+        
 
     def __pred(self, node) :
         pred: Node = node.left
@@ -342,6 +361,7 @@ class AVLTree():
             "left": self.__dict(node.left),
             "right": self.__dict(node.right)
         }
+    
     # Metodos externos ==================================================
     
     #Retorna los n primeros nodos en un recorrido por niveles.

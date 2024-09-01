@@ -14,4 +14,6 @@ if __name__ == '__main__':
     print("============== Arbol uno u ambos criterios ===========", end="\n\n")
     print(arbolito.filter_by("year:2020 OR min:164200000"))
     
-    tree_to_json(arbolito)
+    #tree_to_json(arbolito)
+    
+    print(arbolito.level(arbolito.search("Mission: Impossible II")[0]))
