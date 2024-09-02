@@ -311,3 +311,26 @@ html, body {
     padding-left: 0.5rem; padding-right: 0.5rem;
     border-radius: 8px;
 }
+
+.nav-btn {
+    position: absolute;
+    margin-right: 0.5%;
+
+    width: 1.5rem;
+    height: 1.5rem;
+
+    border-radius: 50%;
+    border: none;
+    outline: none;
+
+    background-color: #474444;
+
+    align-self: center;
+    line-height: 0;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+    background-color: #302e2e;
+    transition: 200ms ease-in;
+}

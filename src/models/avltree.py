@@ -273,7 +273,7 @@ class AVLTree():
             year_chk = (spec_year is None or m_year >= spec_year)
             income_chk = (spec_min_income is None or m_income >= spec_min_income)
             loved_chk = True if loved is None else (m_loved == loved)
-            
+
             # Aplicar la lógica para operandos OR y AND  
             if " OR " in flairs:
                 if year_chk or income_chk and loved_chk:
@@ -284,13 +284,9 @@ class AVLTree():
                     
             # En caso tal no se especifique o no se encuentre un operando 
             else:
-                if year_chk and spec_year is not None:
+                if year_chk and income_chk and loved_chk:
                     filtered_tree.insert(node.data)
-                elif income_chk and spec_min_income is not None:
-                    filtered_tree.insert(node.data)
-                elif loved_chk and loved is not None:
-                    filtered_tree.insert(node.data)
-                    
+
             # Llamado para subarboles izq y der
             _filter_nodes(node.left)
             _filter_nodes(node.right)
