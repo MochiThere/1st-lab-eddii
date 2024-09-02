@@ -71,7 +71,7 @@ class AVLTree():
             return True
         return False    
     
-    def search(self, element_key:str ) -> tuple[Node, Node]:
+    def search(self, element_key:str ) -> tuple:
         pointer, parent = self.root, None
         while (pointer is not None):
             if (element_key == pointer.key):
@@ -193,7 +193,7 @@ class AVLTree():
             self.postorder(node.right)
             print(node.key, end = " ")
             
-    def levels(self, node:Node, queue:list[Node]=[]) -> None:
+    def levels(self, node:Node, queue = []) -> None:
         if node is not None:
             queue.append(node)
         
