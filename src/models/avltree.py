@@ -299,7 +299,29 @@ class AVLTree():
         _filter_nodes(self.root)
         
         return filtered_tree
-      
+    
+    def head(self, amount:int=10):
+        out = AVLTree()
+
+        if self.root is None:
+            return out
+
+        queue = []
+        queue.append(self.root)
+        count = 0
+
+        while queue and count < amount:
+            node = queue.pop(0)
+            out.insert(node.data)
+            count += 1
+
+            if node.left and count < amount:
+                queue.append(node.left)
+            if node.right and count < amount:
+                queue.append(node.right)
+        
+        return out
+
     def __repr__(self):
         return self.__print_tree(self.root)
 

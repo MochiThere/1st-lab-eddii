@@ -106,19 +106,40 @@ html, body {
     align-items: center;
 }
 
+.node-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.lbl-balance {
+    position: absolute;
+    top: -2rem;
+
+    border-radius: 16px;
+    background-color: #292727;
+
+    color: #BBB;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+
+    font-size: 0.8rem;
+    z-index: 10;
+}
+
 .node__children {
     padding: 2rem;
 
     display: flex;
     flex-direction: row;
 
-    border-top: 2px solid #bbbbbb15;
+    border-top: 2px solid #525252;
 }
 
 .node__vertical-border { 
     height: 2rem;
     width: 2px;
-    background-color: #bbbbbb15;
+    background-color: #525252;
 }
 
 .node.node--left {
@@ -139,11 +160,10 @@ html, body {
 
     border-radius: 1.5rem ;
     border: 2px solid transparent;
-    
 
     background: linear-gradient(#292727, #181717);
 
-    color: #BBB;
+    color: #fafafa;
     font-weight: bold;
     font-size: 1rem;
     line-height: 2.5rem;
@@ -171,7 +191,6 @@ html, body {
     background-color: #602a2d;
 }
 
-
 .node:not(.node--root) .node__element::before {
     content: '';
     display: block;
@@ -183,7 +202,7 @@ html, body {
     width: 2px;
     height: 2rem;
 
-    background-color: #bbbbbb15;
+    background-color: #525252;
 }
 
 .node__element, .node__element::before, .node__children, .node__vertical-border {
@@ -199,8 +218,6 @@ html, body {
 
     display: flex;
     justify-content: end;
-
-    
 }
 
 #search-input {

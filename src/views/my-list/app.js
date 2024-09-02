@@ -97,10 +97,11 @@ const visualizeTree = ( node ) => {
     // Si el nodo es null no mostrar
     if (!node) return '';
 
-    const { data, left, right } = node;
+    const { data, left, right, balance } = node;
 
     return `
             <div class="node__element"> ${data} </div>
+            <p class="lbl-balance">${balance}</p>
             ${ // En caso de tener un hijo
                 left || right ? 
                 `
