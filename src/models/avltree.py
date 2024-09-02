@@ -23,7 +23,7 @@ class AVLTree():
                 else:
                     parent.right = to_insert
 
-                self.rebalance(self.search(element.title)[0]) 
+                self.rebalance(to_insert) 
                 return True
     
     def delete (self, element_key: str) -> bool:
@@ -116,8 +116,7 @@ class AVLTree():
             pointer = parent
             parent = self.search(pointer.key)[1]
             pointer.balance = self.calculate_balance(pointer)
-            # parent = self.search(pointer.key)[1]
-            if abs(pointer.balance) == 2 :
+            if pointer.balance == 2 or pointer.balance == -2:
 
                 right_balance = self.calculate_balance(pointer.right)
                 left_balance = self.calculate_balance(pointer.left)
@@ -133,12 +132,11 @@ class AVLTree():
 
                 elif pointer.balance == -2 and left_balance == 1:
                     aux = self.double_left_right_rotation(pointer)
-
+                    
                 else:
                     print("Borderline")
                     aux = self.simple_left_rotation(pointer)
-
-                # Ayuda que es esto va dentro o fuera del if ?  
+                    
                 if parent is None:
                     self.root = aux
                 elif (parent.right == pointer):
@@ -146,7 +144,7 @@ class AVLTree():
                 else:
                     parent.left = aux
             
-    def calculate_balance (self, node: Node) -> int:
+    def calculate_balance (self, node: Node = None) -> int:
         if node is None:
             return 0
         return self.height(node.right) - self.height(node.left)
