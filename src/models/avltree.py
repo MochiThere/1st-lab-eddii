@@ -1,6 +1,5 @@
 from .movie import Movie
 from .node import Node
-
 class AVLTree():
 
     def __init__(self, root:Node= None) -> None:
@@ -8,17 +7,23 @@ class AVLTree():
     
     # Operaciones básicas ============================================
     
-    def insert(self, element: Movie ) -> bool:
-        to_insert = Node(element)
+    def insert(self, result: tuple[bool, Movie]) -> bool:
+        state, movie = result
+        if (state is True):
+            #la pelicula esta en el csv
+            to_insert = Node(movie)
+        else:
+            return False
+        #inserción común
         if self.root is None:
-            self.root =to_insert
+            self.root = to_insert
             return True
         else:
             pointer, parent = self.search(to_insert.key)
             if pointer is not None:
                 return False
             else:
-                if element.title < parent.key:
+                if to_insert.key < parent.key:
                     parent.left = to_insert
                 else:
                     parent.right = to_insert
@@ -149,6 +154,14 @@ class AVLTree():
             return 0
         return self.height(node.right) - self.height(node.left)
     
+    def print_balance_inorder(self, node:Node) -> None:
+        if node is not None:
+            self.print_balance_inorder(node.left)
+            print(node.key)
+            print(node.balance)
+            print("==============================")
+            self.print_balance_inorder(node.right)
+    
     # Rotaciones ======================================================
 
     def simple_left_rotation (self, node: Node) -> Node:
@@ -197,7 +210,7 @@ class AVLTree():
         
         if len(queue) > 0 :
             tmp = queue.pop(0)
-            print(tmp.data)
+            print(tmp.key)
 
             if tmp.left is not None:
                 queue.append(tmp.left)
