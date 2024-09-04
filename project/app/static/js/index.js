@@ -28,38 +28,4 @@ async function getMoviePoster(title) {
         console.error('Error fetching movie data:', error);
     }
 }
-
-function changeTo(){
-    window.location.href = '../main-page/main-page.html';
-}
-
-function toProfiles(){
-    window.location.href = '../profiles/profiles.html';
-}
-
-function toMyList(){
-    window.location.href = '../my-list/my-list.html';
-}
-
 // ========================================================================
-const carousel = document.querySelector('.carousel');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-
-let scrollPosition = 0;
-
-prevButton.addEventListener('click', () => {
-    scrollPosition -= carousel.clientWidth;
-    if (scrollPosition < 0) {
-        scrollPosition = carousel.scrollWidth - carousel.clientWidth;
-    }
-    carousel.style.transform = `translateX(-${scrollPosition}px)`;
-});
-
-nextButton.addEventListener('click', () => {
-    scrollPosition += carousel.clientWidth;
-    if (scrollPosition >= carousel.scrollWidth) {
-        scrollPosition = 0;
-    }
-    carousel.style.transform = `translateX(-${scrollPosition}px)`;
-});

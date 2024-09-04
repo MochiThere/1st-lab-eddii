@@ -209,7 +209,9 @@ class AVLTree():
             
     # Utilidades ======================================================
 
-    def test_tree(self):
+    @staticmethod
+    def test_tree():
+        tree = AVLTree()
         movies = [
             Movie("Mission: Impossible II", 546388108, 215409889, 39.4, 330978219, 60.6, 2000),
             Movie("Gladiator", 460583960, 187705427, 40.8, 272878533, 59.2, 2000),
@@ -224,9 +226,28 @@ class AVLTree():
         ]
         
         for movie in movies:
-            self.insert(movie)
-        return self
+            tree.insert(movie)
+        return tree
     
+    def search_by_title(self, query:str) -> 'AVLTree':
+        filtered = AVLTree()
+
+        # Un poquito mas de lo mismo que se hizo abajo con el filter by :)
+        def _filter_nodes(node: Node):
+            if node is None:
+                return
+
+            if query and node.data.title:
+                if query.lower() in node.data.title.lower():
+                    filtered.insert(node.data)
+
+            _filter_nodes(node.left)
+            _filter_nodes(node.right)
+    
+        _filter_nodes(self.root)
+        return filtered
+
+
     def filter_by(self, flairs: str) :
         if " OR AND " in flairs or " AND OR " in flairs:
             print('Que te pasa animal')

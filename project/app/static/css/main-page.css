@@ -86,9 +86,110 @@ a:hover {
     gap: 1rem;
 
     background-color: transparent;
+    transition: 500ms;
+}
+
+.search-container {
+    position: relative;
+
+    height: 2.5rem;
+    width: 2.5rem;
+
+    border-radius: 1.25rem;
+    background-color: #14141488;
+    transition: 500ms;
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+.search-container .search-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 2.5rem;
+    aspect-ratio: 1/1;
+
+    border-radius: 1.25rem;
+    background-color: #14141488;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container .search-icon::before {
+    content: '';
+    
+    position: absolute;
+
+    width: 0.8rem;
+    aspect-ratio: 1/1;
+
+    border-radius: 50%;
+    border: 2px solid #fafafa;
+
+    transform: translate(-4px,-4px);
+}
+
+.search-container .search-icon::after {
+    content: '';
+    
+    position: absolute;
+
+    width: 4px;
+    height: 10px;
+
+    background-color: #fafafa;
+    transform: translate(6px,6px) rotate(315deg);
+}
+
+.search-container.active {
+    width: 360px;
+}
+
+.search-container .search-input {
+    position: relative;
+    left: 2.5rem;
+
+    width: 300px;
+    height: 2.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+}
+
+.search-container .search-input input {
+    box-sizing: border-box;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding: 0 0.5rem;
+
+    width: 100%;
+    height: 100%;
+    
+    border: 1px solid transparent;
+    outline: none;
+
+    background-color: #1b1b1b;
+    
+    color: #fafafa;
+    font-size: 16px;
+}
+
+.search-container .search-input input:focus {
+    border: 1px solid #fafafa;
 }
 
 .nav-btn {
+    box-sizing: border-box;
+    padding: 0.2rem;
+
     height: 50%;
     aspect-ratio: 1/1;
 
@@ -102,7 +203,7 @@ a:hover {
 }
 
 .nav-btn:hover {
-    height: 55%;
+    padding: 0;
 
     transition: 200ms;
     background-color: #FAFAFA20;

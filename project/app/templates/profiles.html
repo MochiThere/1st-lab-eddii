@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ñetflix</title>
+    <link rel="stylesheet" href="../static/css/profiles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/ñefli.ico') }}" />
+</head>
+
+<body>
+    <div class="list-profiles-container">
+        <div class="list-profiles">
+            <h1>¿Quién quiere ver algo?</h1>
+            <ul class="profile-container">
+                <li class="profile">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='images/ñeflis-avatar.png') }}" alt="icon-img" class="avatar" onclick="changeTo()">
+                    </div>
+                    <h2 class="profile-name">ion</h2>
+                </li>
+                <li class="profile">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='images/ñeflis-avatar.png') }}" alt="icon-img" class="avatar" onclick="changeTo()" >
+                    </div>
+                    <h2 class="profile-name">carlo</h2>
+                </li>
+                <li class="profile">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='images/ñeflis-avatar.png') }}" alt="icon-img" class="avatar" onclick="changeTo()">
+                    </div>
+                    <h2 class="profile-name">sam</h2>
+                </li>
+                <li class="profile viewer-profile">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='images/ñeflis-avatar.png') }}" alt="icon-img" class="avatar" onclick="changeTo()" >
+                    </div>
+                    <h2 class="profile-name">edangulo</h2>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="movie-container" hidden>
+        <h2 id="movie-name">Template text</h2>
+        <img alt="movie-poster" id="poster">
+    </div>
+
+    <script>
+        function changeTo() {
+            window.location.href = "{{ url_for('main.main_page') }}";
+        }
+    </script>
+</body>
+</html>

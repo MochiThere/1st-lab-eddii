@@ -71,28 +71,6 @@ options.forEach(option => {
 });
 
 
-async function loadTreeFromJSON () {
-    try {
-        // Leer el archivo JSON 
-        const res = await fetch('../../resources/data.json');
-
-        // Si no se puede cargar; mandar error
-        if (!res.ok) {
-            console.log("ERROR CARGANDO");
-        }
-
-        // Devolver el objeto 
-        const tree = await res.json();
-        return tree;
-        
-    }  catch ( error ) {
-        // En caso de un error inesperado
-        console.error('Error:', error);
-        return null;
-    }
-}
-
-
 const visualizeTree = ( node ) => {
     // Si el nodo es null no mostrar
     if (!node) return '';
@@ -130,34 +108,6 @@ const visualizeTree = ( node ) => {
             : ""
             }
     `
-}
-
-const visualTree = (node) => {
-    if (!node) return '';
-
-    const { data, left, right } = node;
-
-    return `
-        <div class="node">
-            <div class="node__element">${data}</div>
-            ${left || right ? 
-            `
-                <div class="node__vertical-border"></div>
-                <div class="node__children">
-                    ${left ? (
-                        `<div class="node">
-                            ${visualizeTree(left)}
-                        </div>`
-                    ) : ""}
-                    ${right ? (
-                        `<div class="node">
-                            ${visualizeTree(right)}
-                        </div>`
-                    ) : ""}
-                </div>
-            ` : ""}
-        </div>
-    `;
 }
 
 async function main() {

@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My List</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="app.js"></script>
+    <link rel="stylesheet" href="../static/css/my-list.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/ñefli.ico') }}" />
+    <script defer src="../static/js/app.js"></script>
 </head>
 <body>
     <div class="main-container">
         <header class="main-header">
-            <img class="ñetflix-logo" src="../../static/images/logo.png" alt="logo"> 
-            <a class="go-back" href="../main-page/main-page.html"></a>
+            <img class="ñetflix-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
+            <a class="go-back" href=" {{ url_for('main.main_page') }} "> < </a>
             <h2>Mi Lista</h2>
             <div class="dd-container">
                 <input type="text" placeholder="Buscar y Filtrar" id="search-input" autocomplete="off">
@@ -38,5 +39,26 @@
             </div>
         </div>
     </div>
+    <script>
+        async function loadTreeFromJSON() {
+            try {
+                // Leer el archivo JSON 
+                const res = await fetch("{{ url_for('static', filename='resources/data.json') }}");
+                
+                // Si no se puede cargar; mandar error
+                if (!res.ok) {
+                    console.log("ERROR CARGANDO");
+                }
+    
+                const tree = await res.json();
+                return tree;
+
+                // En caso de un error inesperado
+            } catch (error) {
+                console.error('Error:', error);
+                return null;
+            }
+        }
+    </script>
 </body>
 </html>
