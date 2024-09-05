@@ -17,7 +17,7 @@ def main_page():
         filtered_sample = sample.search_by_title(query)
         print(filtered_sample)
 
-        return jsonify(filtered_sample.to_dict())
+        return render_template('explore.html')
     
     else:
         print("didn't entered")
@@ -26,3 +26,7 @@ def main_page():
 @main.route('/my-list')
 def my_list():
     return render_template('my-list.html')
+
+@main.route('/explore')
+def explore():
+    return render_template('explore.html')
