@@ -113,6 +113,25 @@ class AVLTree():
             sus, sus_parent = sus.left, sus
         return sus, sus_parent, sus.right
 
+    def node_family (self, node) -> tuple:
+        parent = self.search(node)[1]
+        grand_parent = self.search(parent)[1]
+        if (grand_parent.left == parent):
+            return parent, grand_parent, grand_parent.right
+        return parent, grand_parent, grand_parent.left
+            
+    def node_level (self, node) -> int:
+        pointer = self.root
+        level = 0
+        while pointer != node:
+            if node.key < pointer.key:
+                pointer = pointer.left
+            else:
+                pointer = pointer.right
+            level += 1
+        return level
+            
+        
     # Relacionadas al balanceo (AVL) =================================
     
     def rebalance (self, node: Node) -> None:
