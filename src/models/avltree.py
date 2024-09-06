@@ -1,5 +1,7 @@
 from .movie import Movie
 from .node import Node
+from controllers.csv_handler import search_in_csv
+
 class AVLTree():
 
     def __init__(self, root:Node= None) -> None:
@@ -7,8 +9,8 @@ class AVLTree():
     
     # Operaciones básicas ============================================
     
-    def insert(self, result: tuple[bool, Movie]) -> bool:
-        state, movie = result
+    def insert(self, title: str = "") -> bool:
+        state, movie = search_in_csv(title)
         if (state is True):
             #la pelicula esta en el csv
             to_insert = Node(movie)
@@ -27,9 +29,9 @@ class AVLTree():
                     parent.left = to_insert
                 else:
                     parent.right = to_insert
-
-                self.rebalance(to_insert) 
+                self.rebalance(to_insert)
                 return True
+            
     
     def delete (self, element_key: str) -> bool:
         #Buscamos si existe el nodo a eliminar
@@ -72,6 +74,7 @@ class AVLTree():
                     sus_parent.left = sus_son
                 del sus
                 
+            
             self.rebalance(self.search(element_key)[1])
             return True
         return False    
@@ -113,55 +116,67 @@ class AVLTree():
     # Relacionadas al balanceo (AVL) =================================
     
     def rebalance (self, node: Node) -> None:
-        parent: Node = self.search(node.key)[1]
-        pointer: Node = node
-        aux: Node = None
-
-        while (parent is not None):
-            pointer = parent
+        #calcular desbalances iniciales
+        unbalances = self.calculate_ascendance(node)
+        while (len(unbalances) > 0):
+            #seleccionar los desbalances en orden FIFO
+            pointer = unbalances.pop(0)
+            #padre del desbalance para reinsertar
             parent = self.search(pointer.key)[1]
-            pointer.balance = self.calculate_balance(pointer)
-            if pointer.balance == 2 or pointer.balance == -2:
-
-                right_balance = self.calculate_balance(pointer.right)
-                left_balance = self.calculate_balance(pointer.left)
-
-                if pointer.balance == 2 and right_balance == 1:
-                    aux = self.simple_left_rotation(pointer)
-
-                elif pointer.balance == -2 and left_balance == -1:
-                    aux = self.simple_right_rotation(pointer)
-
-                elif pointer.balance == 2 and right_balance == -1:
-                    aux = self.double_right_left_rotation(pointer)
-
-                elif pointer.balance == -2 and left_balance == 1:
-                    aux = self.double_left_right_rotation(pointer)
-                    
-                else:
-                    print("Borderline")
-                    aux = self.simple_left_rotation(pointer)
-                    
-                if parent is None:
-                    self.root = aux
-                elif (parent.right == pointer):
+            #calcular los balances de los hijos del desbalance
+            if pointer.right is not None:
+                pointer.right.balance = self.calculate_node_balance(pointer.right)
+            if pointer.left is not None:
+                pointer.left.balance = self.calculate_node_balance(pointer.left)
+            #segun el tipo de desbalance hacer las rotaciones
+            if pointer.balance == 2 and pointer.right.balance == 1:
+                print("slr sobre " + str(pointer.key))
+                aux = self.simple_left_rotation(pointer)
+            elif pointer.balance == -2 and pointer.left.balance == -1:
+                print("srr sobre " + str(pointer.key))
+                aux = self.simple_right_rotation(pointer)
+            elif pointer.balance == -2 and pointer.left.balance == 1:
+                print("dlrr sobre " + str(pointer.key))
+                aux = self.double_left_right_rotation(pointer)
+            elif pointer.balance == 2 and pointer.right.balance == -1:
+                print("drlr sobre " + str(pointer.key))
+                aux = self.double_right_left_rotation(pointer)
+            else:
+                print("slr caso borde sobre " + str(pointer.key))
+                aux = self.simple_left_rotation(pointer)
+                
+            #reasignar raiz / aux
+            if (pointer == self.root):
+                self.root = aux
+            else:
+                if (parent.right == pointer):
                     parent.right = aux
                 else:
                     parent.left = aux
+            #recalcular la lista de desbalances
+            unbalances = self.calculate_ascendance(pointer)
             
-    def calculate_balance (self, node: Node = None) -> int:
-        if node is None:
-            return 0
-        return self.height(node.right) - self.height(node.left)
-    
-    def print_balance_inorder(self, node:Node) -> None:
+    def calculate_node_balance (self, node: Node = None) -> int:
         if node is not None:
-            self.print_balance_inorder(node.left)
-            print(node.key)
-            print(node.balance)
-            print("==============================")
-            self.print_balance_inorder(node.right)
+            return self.height(node.right) - self.height(node.left)
+        return 0
     
+    def calculate_ascendance (self, node: Node) -> list:
+        unbalances = []
+        while node is not None:
+            node.balance = self.calculate_node_balance(node)
+            if abs(node.balance) == 2:
+                unbalances.append(node)
+            node = self.search(node.key)[1]
+        return unbalances
+
+    def print_balances_inorder (self, node):
+        if node is not None:
+            self.print_balances_inorder(node.left)
+            node.balance = self.calculate_node_balance(node)
+            print("balance " + str(node.key) + ": " + str(node.balance))
+            self.print_balances_inorder(node.right)
+            
     # Rotaciones ======================================================
 
     def simple_left_rotation (self, node: Node) -> Node:
