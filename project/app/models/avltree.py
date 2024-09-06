@@ -8,24 +8,25 @@ class AVLTree():
     
     # Operaciones básicas ============================================
     
-    def insert(self, element: Movie ) -> bool:
-        to_insert = Node(element)
+    def insert(self, movie:Movie) -> bool:
+        to_insert = Node(movie)
+
+        # Inserción común
         if self.root is None:
-            self.root =to_insert
+            self.root = to_insert
             return True
         else:
             pointer, parent = self.search(to_insert.key)
             if pointer is not None:
                 return False
             else:
-                if element.title < parent.key:
+                if to_insert.key < parent.key:
                     parent.left = to_insert
                 else:
                     parent.right = to_insert
-
-                self.rebalance(to_insert) 
+                self.rebalance(to_insert)
                 return True
-    
+            
     def delete (self, element_key: str) -> bool:
         #Buscamos si existe el nodo a eliminar
         pointer, parent = self.search(element_key)
@@ -108,47 +109,67 @@ class AVLTree():
     # Relacionadas al balanceo (AVL) =================================
     
     def rebalance (self, node: Node) -> None:
-        parent: Node = self.search(node.key)[1]
-        pointer: Node = node
-        aux: Node = None
-
-        while (parent is not None):
-            pointer = parent
+        # Calcular balances iniciales
+        unbalances = self.calculate_ascendance(node)
+        while (len(unbalances) > 0):
+            # Seleccionar los desbalances en orden FIFO
+            pointer = unbalances.pop(0)
+            #padre del desbalance para reinsertar
             parent = self.search(pointer.key)[1]
-            pointer.balance = self.calculate_balance(pointer)
-            if pointer.balance == 2 or pointer.balance == -2:
-
-                right_balance = self.calculate_balance(pointer.right)
-                left_balance = self.calculate_balance(pointer.left)
-
-                if pointer.balance == 2 and right_balance == 1:
-                    aux = self.simple_left_rotation(pointer)
-
-                elif pointer.balance == -2 and left_balance == -1:
-                    aux = self.simple_right_rotation(pointer)
-
-                elif pointer.balance == 2 and right_balance == -1:
-                    aux = self.double_right_left_rotation(pointer)
-
-                elif pointer.balance == -2 and left_balance == 1:
-                    aux = self.double_left_right_rotation(pointer)
-                    
-                else:
-                    print("Borderline")
-                    aux = self.simple_left_rotation(pointer)
-                    
-                if parent is None:
-                    self.root = aux
-                elif (parent.right == pointer):
+            #calcular los balances de los hijos del desbalance
+            if pointer.right is not None:
+                pointer.right.balance = self.calculate_node_balance(pointer.right)
+            if pointer.left is not None:
+                pointer.left.balance = self.calculate_node_balance(pointer.left)
+            #segun el tipo de desbalance hacer las rotaciones
+            if pointer.balance == 2 and pointer.right.balance == 1:
+                print("slr sobre " + str(pointer.key))
+                aux = self.simple_left_rotation(pointer)
+            elif pointer.balance == -2 and pointer.left.balance == -1:
+                print("srr sobre " + str(pointer.key))
+                aux = self.simple_right_rotation(pointer)
+            elif pointer.balance == -2 and pointer.left.balance == 1:
+                print("dlrr sobre " + str(pointer.key))
+                aux = self.double_left_right_rotation(pointer)
+            elif pointer.balance == 2 and pointer.right.balance == -1:
+                print("drlr sobre " + str(pointer.key))
+                aux = self.double_right_left_rotation(pointer)
+            else:
+                print("slr caso borde sobre " + str(pointer.key))
+                aux = self.simple_left_rotation(pointer)
+                
+            #reasignar raiz / aux
+            if (pointer == self.root):
+                self.root = aux
+            else:
+                if (parent.right == pointer):
                     parent.right = aux
                 else:
                     parent.left = aux
+            #recalcular la lista de desbalances
+            unbalances = self.calculate_ascendance(pointer)
             
-    def calculate_balance (self, node: Node = None) -> int:
-        if node is None:
-            return 0
-        return self.height(node.right) - self.height(node.left)
+    def calculate_node_balance (self, node: Node = None) -> int:
+        if node is not None:
+            return self.height(node.right) - self.height(node.left)
+        return 0
     
+    def calculate_ascendance (self, node: Node) -> list:
+        unbalances = []
+        while node is not None:
+            node.balance = self.calculate_node_balance(node)
+            if abs(node.balance) == 2:
+                unbalances.append(node)
+            node = self.search(node.key)[1]
+        return unbalances
+
+    def print_balances_inorder (self, node):
+        if node is not None:
+            self.print_balances_inorder(node.left)
+            node.balance = self.calculate_node_balance(node)
+            print("balance " + str(node.key) + ": " + str(node.balance))
+            self.print_balances_inorder(node.right)
+            
     # Rotaciones ======================================================
 
     def simple_left_rotation (self, node: Node) -> Node:
@@ -197,7 +218,7 @@ class AVLTree():
         
         if len(queue) > 0 :
             tmp = queue.pop(0)
-            print(tmp.data)
+            print(tmp.key)
 
             if tmp.left is not None:
                 queue.append(tmp.left)
@@ -209,9 +230,7 @@ class AVLTree():
             
     # Utilidades ======================================================
 
-    @staticmethod
-    def test_tree():
-        tree = AVLTree()
+    def test_tree(self):
         movies = [
             Movie("Mission: Impossible II", 546388108, 215409889, 39.4, 330978219, 60.6, 2000),
             Movie("Gladiator", 460583960, 187705427, 40.8, 272878533, 59.2, 2000),
@@ -226,28 +245,9 @@ class AVLTree():
         ]
         
         for movie in movies:
-            tree.insert(movie)
-        return tree
+            self.insert(movie)
+        return self
     
-    def search_by_title(self, query:str) -> 'AVLTree':
-        filtered = AVLTree()
-
-        # Un poquito mas de lo mismo que se hizo abajo con el filter by :)
-        def _filter_nodes(node: Node):
-            if node is None:
-                return
-
-            if query and node.data.title:
-                if query.lower() in node.data.title.lower():
-                    filtered.insert(node.data)
-
-            _filter_nodes(node.left)
-            _filter_nodes(node.right)
-    
-        _filter_nodes(self.root)
-        return filtered
-
-
     def filter_by(self, flairs: str) :
         if " OR AND " in flairs or " AND OR " in flairs:
             print('Que te pasa animal')
