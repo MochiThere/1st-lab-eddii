@@ -3,8 +3,8 @@ from csv import reader
     
 csv_path = "project/app/static/resources/dataset_movies.csv"
 
-def search_in_csv (title: str) -> tuple[bool, list[str]]:
-    movies : list[str] = []
+def search_in_csv (title: str) -> tuple[bool, list[Movie]]:
+    movies = []
 
     with open(csv_path, "r") as csv_file:
         csv_reader = reader(csv_file)
@@ -12,7 +12,7 @@ def search_in_csv (title: str) -> tuple[bool, list[str]]:
 
         for row in csv_reader:
             if title.strip().lower() in row[0].strip().lower():
-                movies.append(row[0])
+                movies.append(Movie(row[0],row[1],row[2],row[3],row[4],row[5],row[6]))
 
     return (False, []) if len(movies) == 0 else (True, movies)
         

@@ -386,7 +386,7 @@ class AVLTree():
             return None
         
         return {
-            "data": node.data.title,
+            "data": node.data.to_dict(),
             "balance": node.balance,
             "left": self.__dict(node.left),
             "right": self.__dict(node.right)

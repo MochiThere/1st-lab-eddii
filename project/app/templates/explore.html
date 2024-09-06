@@ -70,7 +70,7 @@
                     
                     const movieTitle = document.createElement('h2');
                     movieTitle.classList.add('movie-title');
-                    movieTitle.textContent = movie;
+                    movieTitle.textContent = movie.title;
 
                     const cardExpanded = document.createElement('div');
                     cardExpanded.classList.add('card-expanded');
@@ -80,6 +80,10 @@
 
                     const addButton = document.createElement('button');
                     addButton.classList.add('add-button');
+
+                    addButton.addEventListener('click', function () {
+                        sendMovie(movie);
+                    });
 
                     expandedContent.appendChild(addButton);
                     cardExpanded.appendChild(expandedContent);
@@ -95,7 +99,24 @@
             }
         }
 
-        // Call the function with the results (replace with actual fetched data)
+        function sendMovie(movie) {
+                
+            fetch('/my-list', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(movie) 
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
         createMovieCarousel(results);
     </script>
 </body>

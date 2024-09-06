@@ -334,3 +334,120 @@ html, body {
     background-color: #302e2e;
     transition: 200ms ease-in;
 }
+
+.movie-data-container {
+    box-sizing: border-box;
+    padding: 1rem;
+
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-100%, -50%);
+
+    width: 20%;
+    height: fit-content;
+    
+    background-color: #101010;
+
+    z-index: 1000;
+    cursor: default;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: #fafafa;
+    transition: 400ms ease-out;
+}
+
+.movie-data-container hr {
+    width: 100%;
+
+    border: 1px dotted #292727;
+}
+
+#movie-title {
+    margin: 1rem;
+    
+    text-wrap: balance;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    
+
+    color: #BBB;
+    font-family: 'Calibri';
+    font-weight: lighter;
+}
+
+.info ul {
+    padding: 0.5rem 2rem;
+    margin: 0;
+    list-style: none;
+}
+
+.action-container {
+    box-sizing: border-box;
+    padding: 1rem;
+
+    background-color: #101010;
+
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+#hide {
+    margin: 0;
+
+    background-color: transparent;
+    
+    color:#525252;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+}
+
+#hide:hover {
+    color: #BBB;
+    transition: 200ms ease-in;
+}
+
+#delete-node{
+    box-sizing: border-box;
+    padding: 0.5rem;
+
+    background-color: transparent;
+    
+    color:#9a2c32 ;
+    font-size: 1.2rem;
+    font-weight: lighter;
+
+    border: 1px solid #9a2c32 ;
+    border-radius: 16px;
+    outline: none;
+}
+
+#delete-node:hover {
+    background-color: red;
+    color: #fafafa;
+    transition: 100ms ease-in;
+}
+
+.movie-data-container.active {
+    transform: translate(-25%, -50%);
+    transition: 400ms ease-out;
+}

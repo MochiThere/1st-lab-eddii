@@ -109,13 +109,9 @@
         }
 
         const input = document.getElementById('text-area');
-        let typeTimer;
-        let timeGap = 1000;
 
-        input.addEventListener('keyup', () => {
-            clearTimeout(typeTimer);
-        
-            typeTimer = setTimeout(() => {
+        input.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
                 const query = input.value;
             
                 fetch('/browse', {
@@ -127,14 +123,13 @@
                         'text-area': query
                     })
                 })
-                .then(() => {
-                    window.location.href = '/explore';
+                .then((response) => {
+                    window.location.href = response.url;
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
-            
-            }, timeGap);
+            }
         });
     </script>
 </body>

@@ -76,9 +76,12 @@ const visualizeTree = ( node ) => {
     if (!node) return '';
 
     const { data, left, right, balance } = node;
+    console.log(data)
+
+    const encodedData = JSON.stringify(data);
 
     return `
-            <div class="node__element"> ${data} </div>
+            <div class="node__element" onclick='displayData(${encodedData},${balance})'> ${data.title} </div>
             <p class="lbl-balance">${balance}</p>
             ${ // En caso de tener un hijo
                 left || right ? 
@@ -110,6 +113,37 @@ const visualizeTree = ( node ) => {
     `
 }
 
+function displayData ( movieData, balance ){
+    console.log(movieData)
+    const movieTitle = document.getElementById('movie-title');
+    const yearElement = document.querySelector('.movie-info li:nth-child(1)');
+    const foreignElement = document.querySelector('.movie-info li:nth-child(2)');
+    const domesticElement = document.querySelector('.movie-info li:nth-child(3)');
+    const worldwideElement = document.querySelector('.movie-info li:nth-child(4)');
+    const foreignPercentElement = document.querySelector('.movie-info li:nth-child(5)');
+    const domesticPercentElement = document.querySelector('.movie-info li:nth-child(6)');
+    
+    const levelElement = document.querySelector('.node-info li:nth-child(1)');
+    const balanceElement = document.querySelector('.node-info li:nth-child(2)');
+    const parentElement = document.querySelector('.node-info li:nth-child(3)');
+    const uncleElement = document.querySelector('.node-info li:nth-child(4)');
+    const grandparentElement = document.querySelector('.node-info li:nth-child(5)');
+
+    movieTitle.textContent = movieData.title;
+    yearElement.innerHTML = `Year: ${movieData.year}`;
+    foreignElement.innerHTML = `Foreign Earnings: $${movieData.foreign}`;
+    domesticElement.innerHTML = `Domestic Earnings: $${movieData.domestic}`;
+    worldwideElement.innerHTML = `Worldwide Earnings: $${movieData.worldwide}`;
+    foreignPercentElement.innerHTML = `Foreign Percent Earnings: ${movieData.foreign_percent}%`;
+    domesticPercentElement.innerHTML = `Domestic Percent Earnings: ${movieData.domestic_percent}%`;
+
+    /*levelElement.innerHTML = `Nivel: ${getLevelOfNode(movieData)}`;
+    balanceElement.innerHTML = `Balance: ${balance}`;
+    parentElement.innerHTML = `Nodo Padre: ${getParentNode(movieData)}`;
+    uncleElement.innerHTML = `Nodo Tio: ${getUncleNode(movieData)}`; 
+    grandparentElement.innerHTML = `Nodo Abuelo: ${getGrandparentNode(movieData)}`;*/
+}
+
 async function main() {
     const rootNode = await loadTreeFromJSON();
 
@@ -119,6 +153,18 @@ async function main() {
         treeContainer.innerHTML = visualizeTree(rootNode.root);
     } else {
         console.error('No se pudo cargar el árbol AVL.');
+    }
+
+    const btn = document.getElementById('hide');
+    const movieDataContainer = document.querySelector('.movie-data-container');
+
+    btn.onclick = function () {
+        movieDataContainer.classList.toggle('active');
+        if ( btn.textContent === '>>>') {
+            btn.textContent = '<<<'
+        } else {
+            btn.textContent = '>>>'
+        }
     }
 }
 

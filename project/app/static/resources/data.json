@@ -1,53 +1,68 @@
 {
     "root": {
-        "data": "Mission: Impossible II",
-        "balance": 1,
-        "left": {
-            "data": "Gladiator",
-            "balance": 2,
-            "left": {
-                "data": "Cast Away",
-                "balance": 1,
-                "left": null,
-                "right": {
-                    "data": "Dinosaur",
-                    "balance": 0,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "data": "How the Grinch Stole Christmas",
-                "balance": 1,
-                "left": null,
-                "right": {
-                    "data": "Meet the Parents",
-                    "balance": 0,
-                    "left": null,
-                    "right": null
-                }
-            }
+        "data": {
+            "title": "Of Gods and Men",
+            "worldwide": 43803417.0,
+            "domestic": 3951596.0,
+            "domestic_percent": 9.0,
+            "foreign": 39851821.0,
+            "foreign_percent": 91.0,
+            "year": 2010
         },
-        "right": {
-            "data": "What Women Want",
-            "balance": -1,
-            "left": {
-                "data": "The Perfect Storm",
-                "balance": 1,
-                "left": null,
-                "right": {
-                    "data": "What Lies Beneath",
-                    "balance": 0,
-                    "left": null,
-                    "right": null
-                }
+        "balance": 0,
+        "left": {
+            "data": {
+                "title": "City of God",
+                "worldwide": 30641770.0,
+                "domestic": 7564459.0,
+                "domestic_percent": 24.7,
+                "foreign": 23077311.0,
+                "foreign_percent": 75.3,
+                "year": 2002
             },
+            "balance": 1,
+            "left": null,
             "right": {
-                "data": "X-Men",
+                "data": {
+                    "title": "Jesus Thirsts: The Miracle of the Eucharist",
+                    "worldwide": 2927121.0,
+                    "domestic": 2927121.0,
+                    "domestic_percent": 100.0,
+                    "foreign": 0.0,
+                    "foreign_percent": 0.0,
+                    "year": 2024
+                },
                 "balance": 0,
                 "left": null,
                 "right": null
             }
+        },
+        "right": {
+            "data": {
+                "title": "Yesterday",
+                "worldwide": 154608856.0,
+                "domestic": 73286650.0,
+                "domestic_percent": 47.4,
+                "foreign": 81322206.0,
+                "foreign_percent": 52.6,
+                "year": 2019
+            },
+            "balance": -1,
+            "left": {
+                "data": {
+                    "title": "The Good Dinosaur",
+                    "worldwide": 332207671.0,
+                    "domestic": 123087120.0,
+                    "domestic_percent": 37.1,
+                    "foreign": 209120551.0,
+                    "foreign_percent": 62.9,
+                    "year": 2015
+                },
+                "balance": 0,
+                "left": null,
+                "right": null
+            },
+            "right": null
         }
     }
 }
