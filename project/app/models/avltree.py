@@ -123,19 +123,14 @@ class AVLTree():
                 pointer.left.balance = self.calculate_node_balance(pointer.left)
             #segun el tipo de desbalance hacer las rotaciones
             if pointer.balance == 2 and pointer.right.balance == 1:
-                print("slr sobre " + str(pointer.key))
                 aux = self.simple_left_rotation(pointer)
             elif pointer.balance == -2 and pointer.left.balance == -1:
-                print("srr sobre " + str(pointer.key))
                 aux = self.simple_right_rotation(pointer)
             elif pointer.balance == -2 and pointer.left.balance == 1:
-                print("dlrr sobre " + str(pointer.key))
                 aux = self.double_left_right_rotation(pointer)
             elif pointer.balance == 2 and pointer.right.balance == -1:
-                print("drlr sobre " + str(pointer.key))
                 aux = self.double_right_left_rotation(pointer)
             else:
-                print("slr caso borde sobre " + str(pointer.key))
                 aux = self.simple_left_rotation(pointer)
                 
             #reasignar raiz / aux
@@ -314,6 +309,24 @@ class AVLTree():
         _filter_nodes(self.root)
         
         return filtered_tree
+    
+    def search_by_title(self, query:str) -> 'AVLTree':
+        filtered = AVLTree()
+
+        # Un poquito mas de lo mismo que se hizo abajo con el filter by :)
+        def _filter_nodes(node: Node):
+            if node is None:
+                return
+
+            if query and node.data.title:
+                if query.lower() in node.data.title.lower():
+                    filtered.insert(node.data)
+
+            _filter_nodes(node.left)
+            _filter_nodes(node.right)
+    
+        _filter_nodes(self.root)
+        return filtered
     
     def head(self, amount:int=10):
         out = AVLTree()

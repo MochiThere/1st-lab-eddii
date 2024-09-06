@@ -113,12 +113,28 @@
         let timeGap = 1000;
 
         input.addEventListener('keyup', () => {
-            clearTimeout(typeTimer)
-
-            typeTimer = setTimeout( () => {
-                document.getElementById('search-form').submit() 
-            },timeGap
-            );
+            clearTimeout(typeTimer);
+        
+            typeTimer = setTimeout(() => {
+                const query = input.value;
+            
+                fetch('/browse', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        'text-area': query
+                    })
+                })
+                .then(() => {
+                    window.location.href = '/explore';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            
+            }, timeGap);
         });
     </script>
 </body>

@@ -264,7 +264,7 @@ main {
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     gap: 1rem;
 }
@@ -309,12 +309,13 @@ main {
     left: 50%;
     padding: 0.5rem;
 
+    width: 80%;
+
     font-family: 'Calibri';
-    font-size: 2vw;
+    font-size: 1.8vw;
     font-weight: bold;
     color: #BBB;
   
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
@@ -385,6 +386,36 @@ main {
     width: 85%;
     color: #fafafa;
     background-color: #141414;
+}
+
+.add-button:hover::after {
+    content: "Agregar a mi lista";
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+
+    font-size: 1vw;
+}
+
+.add-button::after {
+    content: "+";
+}
+
+.add-button:active {
+    background-color: #491619;
+    transform: scale(0.9);
+    transition: 10ms;
 }
 
 
