@@ -249,42 +249,62 @@ class AVLTree():
             self.insert(movie)
         return self
     
-    def filter_by(self, flairs: str) :
-        if " OR AND " in flairs or " AND OR " in flairs:
+    def search_and_filter(self, query:str):
+        
+        filtered = AVLTree()
+        
+        if " OR AND " in query or " AND OR " in query:
             print('Que te pasa animal')
-            return []
+            return filtered
 
         spec_year: int = None
         spec_min_income: float = None
+        loved:bool = None
+        name:str = ""
+        flairs: list[str] = []
         
-        # Extraer los datos desde los flairs
+        # Extraer los datos de los flairs en el query
         try:
-            if "year:" in flairs:
-                spec_year = int(flairs.split("year:")[1].split()[0])
-
-            if "min:" in flairs:
-                spec_min_income = float(flairs.split("min:")[1].split()[0])
+            for flair in query.split(" "): 
+                # Se divide el query por espacios y se analiza palabra por palabra
                 
+                if " OR " in flair or " AND " in flair:
+                    flairs.append(flair)
+                    continue
+                
+                if ":" not in flair:
+                    name += flair
+                    continue
+                
+                if "year:" in flair:
+                    spec_year = int(flair.split("year:")[1].split()[0])
+                    flairs.append(flair)
+                    continue
+                     
+                if "min:" in flair:
+                    spec_min_income = float(flair.split("min:")[1].split()[0])
+                    flairs.append(flair)
+                    continue
+                
+                if "loved:true" in query:
+                    loved = True
+                    flairs.append(flair)
+                    continue
+                elif "loved:false" in query:
+                    loved = False
+                    flairs.append(flair)
+                    continue
+
         except ValueError:
             print("Not found or bad input")
             return []
-
-        if "loved:true" in flairs:
-            loved = True
-        elif "loved:false" in flairs:
-            loved = False
-        else:
-            loved = None
         
-        # Inicializar el arbol con los noditos filtrados
-        filtered_tree = AVLTree()
-        
-        # Funcion (dentro de funcion wiii) para filtrar nodos 💫 r e c u r s i v a m e n t e 💫
         def _filter_nodes(node):
             if node is None:
                 return None
-
+            
             # Extraer la informacion del nodo
+            m_name = node.key
             m_year = node.data.year
             m_income = node.data.foreign_earnings
             m_loved = node.data.domestic_percent_earnings >= node.data.foreign_percent_earnings
@@ -294,31 +314,33 @@ class AVLTree():
             income_chk = (spec_min_income is None or m_income >= spec_min_income)
             loved_chk = True if loved is None else (m_loved == loved)
             
-            # Aplicar la lógica para operandos OR y AND  
-            if " OR " in flairs:
-                if year_chk or income_chk and loved_chk:
-                    filtered_tree.insert(node.data)
-            elif " AND " in flairs:
-                if year_chk and income_chk and loved_chk:
-                    filtered_tree.insert(node.data)
-                    
-            # En caso tal no se especifique o no se encuentre un operando 
-            else:
-                if year_chk and spec_year is not None:
-                    filtered_tree.insert(node.data)
-                elif income_chk and spec_min_income is not None:
-                    filtered_tree.insert(node.data)
-                elif loved_chk and loved is not None:
-                    filtered_tree.insert(node.data)
-                    
-            # Llamado para subarboles izq y der
+            
+            if flairs:
+                # Si hay flairs, usar logica de flairs para añadir nodos al arbol
+                # Aplicar la lógica para operandos OR y AND  
+                if " OR " in flairs:
+                    if year_chk or income_chk and loved_chk:
+                        filtered.insert(node.data)
+                elif " AND " in flairs:
+                    if year_chk and income_chk and loved_chk:
+                        filtered.insert(node.data) 
+                else:
+                    if year_chk and income_chk and loved_chk:
+                        print(year_chk)
+                        filtered.insert(node.data)
+            
+            if name:
+                #Si existe un nombre, revisar por él
+                if name.lower() in m_name.lower().replace(' ', ''):
+                    filtered.insert(node.data)
+            
             _filter_nodes(node.left)
             _filter_nodes(node.right)
-            
-        # Ejecutar el primer recorrido
-        _filter_nodes(self.root)
         
-        return filtered_tree
+        _filter_nodes(self.root)
+        return filtered
+                    
+        
       
     def __repr__(self):
         return self.__print_tree(self.root)
