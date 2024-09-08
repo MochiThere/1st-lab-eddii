@@ -83,6 +83,9 @@
 
                     addButton.addEventListener('click', function () {
                         sendMovie(movie);
+
+                        addButton.disabled = true;
+                        addButton.classList.add('checked');
                     });
 
                     expandedContent.appendChild(addButton);

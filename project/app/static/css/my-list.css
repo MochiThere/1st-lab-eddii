@@ -381,6 +381,7 @@ html, body {
 }
 
 .info {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -393,9 +394,16 @@ html, body {
 }
 
 .info ul {
+    box-sizing: border-box;
+    width: 100%;
     padding: 0.5rem 2rem;
     margin: 0;
     list-style: none;
+}
+
+.info ul li {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .action-container {
@@ -432,11 +440,11 @@ html, body {
 
     background-color: transparent;
     
-    color:#9a2c32 ;
+    color:#ff4c4c ;
     font-size: 1.2rem;
     font-weight: lighter;
 
-    border: 1px solid #9a2c32 ;
+    border: 1px solid #ff4c4c ;
     border-radius: 16px;
     outline: none;
 }

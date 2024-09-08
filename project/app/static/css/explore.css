@@ -381,6 +381,16 @@ main {
     transition: 300ms ease-in-out;
 }
 
+.add-button:disabled {
+    cursor: not-allowed;
+
+    border: 1px solid #BBB;
+    background-color: transparent;
+    pointer-events: none;
+    color: #BBB;
+}
+
+
 .add-button:hover {
     width: 85%;
     color: #fafafa;
@@ -409,6 +419,11 @@ main {
 
 .add-button::after {
     content: "+";
+}
+
+.add-button.checked::after {
+    content: "✔";
+    font-size: 0.9vw;
 }
 
 .add-button:active {

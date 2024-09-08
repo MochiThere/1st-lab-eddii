@@ -71,50 +71,53 @@ options.forEach(option => {
 });
 
 
-const visualizeTree = ( node ) => {
+const visualizeTree = (node) => {
     // Si el nodo es null no mostrar
     if (!node) return '';
 
-    const { data, left, right, balance } = node;
+    const { data, left, right, balance, level, parent, uncle, grandparent } = node;
     console.log(data)
 
-    const encodedData = JSON.stringify(data);
+    // Encode the full node data, including level, parent, uncle, and grandparent
+    const encodedData = JSON.stringify({ ...data, level, parent, uncle, grandparent });
 
     return `
-            <div class="node__element" onclick='displayData(${encodedData},${balance})'> ${data.title} </div>
-            <p class="lbl-balance">${balance}</p>
-            ${ // En caso de tener un hijo
-                left || right ? 
-                `
-                    <div class="node__vertical-border"></div>
-                    <div class="node__children">
-                        ${ // Si es el izquierdo reutilizar el llamado
-                            left ? (
-                            ` 
-                                <div class="node node--left">
-                                    ${visualizeTree(left)}
-                                </div>
-                            `
-                            ) : ""
-                        }
-                        ${ // Caso del derecho
-                            right ? (
-                            ` 
-                                <div class="node node--right">
-                                    ${visualizeTree(right)}
-                                </div>
-                            `
-                            ) : ""
-                        }
-                    </div>
-                `
+        <div class="node__element" onclick='displayData(${encodedData},${balance})'> ${data.title} </div>
+        <p class="lbl-balance">${balance}</p>
+        ${
+            // En caso de tener un hijo
+            left || right ?
+            `
+                <div class="node__vertical-border"></div>
+                <div class="node__children">
+                    ${
+                        // Si es el izquierdo reutilizar el llamado
+                        left ? (
+                        `
+                            <div class="node node--left">
+                                ${visualizeTree(left)}
+                            </div>
+                        `
+                        ) : ""
+                    }
+                    ${
+                        // Caso del derecho
+                        right ? (
+                        `
+                            <div class="node node--right">
+                                ${visualizeTree(right)}
+                            </div>
+                        `
+                        ) : ""
+                    }
+                </div>
+            `
             : ""
-            }
-    `
+        }
+    `;
 }
 
-function displayData ( movieData, balance ){
-    console.log(movieData)
+function displayData(movieData, balance) {
     const movieTitle = document.getElementById('movie-title');
     const yearElement = document.querySelector('.movie-info li:nth-child(1)');
     const foreignElement = document.querySelector('.movie-info li:nth-child(2)');
@@ -122,7 +125,7 @@ function displayData ( movieData, balance ){
     const worldwideElement = document.querySelector('.movie-info li:nth-child(4)');
     const foreignPercentElement = document.querySelector('.movie-info li:nth-child(5)');
     const domesticPercentElement = document.querySelector('.movie-info li:nth-child(6)');
-    
+
     const levelElement = document.querySelector('.node-info li:nth-child(1)');
     const balanceElement = document.querySelector('.node-info li:nth-child(2)');
     const parentElement = document.querySelector('.node-info li:nth-child(3)');
@@ -137,11 +140,11 @@ function displayData ( movieData, balance ){
     foreignPercentElement.innerHTML = `Foreign Percent Earnings: ${movieData.foreign_percent}%`;
     domesticPercentElement.innerHTML = `Domestic Percent Earnings: ${movieData.domestic_percent}%`;
 
-    /*levelElement.innerHTML = `Nivel: ${getLevelOfNode(movieData)}`;
+    levelElement.innerHTML = `Level: ${movieData.level}`;
     balanceElement.innerHTML = `Balance: ${balance}`;
-    parentElement.innerHTML = `Nodo Padre: ${getParentNode(movieData)}`;
-    uncleElement.innerHTML = `Nodo Tio: ${getUncleNode(movieData)}`; 
-    grandparentElement.innerHTML = `Nodo Abuelo: ${getGrandparentNode(movieData)}`;*/
+    parentElement.innerHTML = `Parent Node: ${movieData.parent || 'N/A'}`;
+    uncleElement.innerHTML = `Uncle Node: ${movieData.uncle || 'N/A'}`;
+    grandparentElement.innerHTML = `Grandparent Node: ${movieData.grandparent || 'N/A'}`;
 }
 
 async function main() {
@@ -160,7 +163,8 @@ async function main() {
 
     btn.onclick = function () {
         movieDataContainer.classList.toggle('active');
-        if ( btn.textContent === '>>>') {
+
+        if (movieDataContainer.classList.contains('active')) {
             btn.textContent = '<<<'
         } else {
             btn.textContent = '>>>'
