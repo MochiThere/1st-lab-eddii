@@ -1,136 +1,17 @@
 {
     "root": {
         "data": {
-            "title": "Pok\u00e9mon the Movie: Destiny Deoxys",
-            "worldwide": 34337258.0,
-            "domestic": 0.0,
-            "domestic_percent": 0.0,
-            "foreign": 34337258.0,
-            "foreign_percent": 100.0,
-            "year": 2004
+            "title": "Jurassic Park III",
+            "worldwide": 368780809.0,
+            "domestic": 181171875.0,
+            "domestic_percent": 49.1,
+            "foreign": 187608934.0,
+            "foreign_percent": 50.9,
+            "year": 2001
         },
-        "balance": 1,
-        "left": {
-            "data": {
-                "title": "Pok\u00e9mon the Movie 2000",
-                "worldwide": 133949270.0,
-                "domestic": 43758684.0,
-                "domestic_percent": 32.7,
-                "foreign": 90190586.0,
-                "foreign_percent": 67.3,
-                "year": 2000
-            },
-            "balance": -1,
-            "left": {
-                "data": {
-                    "title": "Pok\u00e9mon",
-                    "worldwide": 32293377.0,
-                    "domestic": 0.0,
-                    "domestic_percent": 0.0,
-                    "foreign": 32293377.0,
-                    "foreign_percent": 100.0,
-                    "year": 2013
-                },
-                "balance": 0,
-                "left": null,
-                "right": null,
-                "level": 2,
-                "parent": "Pok\u00e9mon the Movie 2000",
-                "uncle": "Scary Movie 2",
-                "grandparent": "Pok\u00e9mon the Movie: Destiny Deoxys"
-            },
-            "right": null,
-            "level": 1,
-            "parent": "Pok\u00e9mon the Movie: Destiny Deoxys",
-            "uncle": null,
-            "grandparent": null
-        },
-        "right": {
-            "data": {
-                "title": "Scary Movie 2",
-                "worldwide": 141220678.0,
-                "domestic": 71308997.0,
-                "domestic_percent": 50.5,
-                "foreign": 69911681.0,
-                "foreign_percent": 49.5,
-                "year": 2001
-            },
-            "balance": 0,
-            "left": {
-                "data": {
-                    "title": "Pok\u00e9mon: Zoroark: Master of Illusions",
-                    "worldwide": 71143529.0,
-                    "domestic": 0.0,
-                    "domestic_percent": 0.0,
-                    "foreign": 71143529.0,
-                    "foreign_percent": 100.0,
-                    "year": 2010
-                },
-                "balance": 1,
-                "left": null,
-                "right": {
-                    "data": {
-                        "title": "Scary Movie",
-                        "worldwide": 278019771.0,
-                        "domestic": 157019771.0,
-                        "domestic_percent": 56.5,
-                        "foreign": 121000000.0,
-                        "foreign_percent": 43.5,
-                        "year": 2000
-                    },
-                    "balance": 0,
-                    "left": null,
-                    "right": null,
-                    "level": 3,
-                    "parent": "Pok\u00e9mon: Zoroark: Master of Illusions",
-                    "uncle": "Scary Movie 3",
-                    "grandparent": "Scary Movie 2"
-                },
-                "level": 2,
-                "parent": "Scary Movie 2",
-                "uncle": "Pok\u00e9mon the Movie 2000",
-                "grandparent": "Pok\u00e9mon the Movie: Destiny Deoxys"
-            },
-            "right": {
-                "data": {
-                    "title": "Scary Movie 3",
-                    "worldwide": 220673217.0,
-                    "domestic": 110003217.0,
-                    "domestic_percent": 49.8,
-                    "foreign": 110670000.0,
-                    "foreign_percent": 50.2,
-                    "year": 2003
-                },
-                "balance": 1,
-                "left": null,
-                "right": {
-                    "data": {
-                        "title": "Scary Movie V",
-                        "worldwide": 78378744.0,
-                        "domestic": 32015787.0,
-                        "domestic_percent": 40.8,
-                        "foreign": 46362957.0,
-                        "foreign_percent": 59.2,
-                        "year": 2013
-                    },
-                    "balance": 0,
-                    "left": null,
-                    "right": null,
-                    "level": 3,
-                    "parent": "Scary Movie 3",
-                    "uncle": "Pok\u00e9mon: Zoroark: Master of Illusions",
-                    "grandparent": "Scary Movie 2"
-                },
-                "level": 2,
-                "parent": "Scary Movie 2",
-                "uncle": "Pok\u00e9mon the Movie 2000",
-                "grandparent": "Pok\u00e9mon the Movie: Destiny Deoxys"
-            },
-            "level": 1,
-            "parent": "Pok\u00e9mon the Movie: Destiny Deoxys",
-            "uncle": null,
-            "grandparent": null
-        },
+        "balance": 0,
+        "left": null,
+        "right": null,
         "level": 0,
         "parent": null,
         "uncle": null,

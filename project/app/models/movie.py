@@ -19,6 +19,9 @@ class Movie:
             "year": self.year
         }
     
+    def __repr__(self) -> str:
+        return self.title
+    
     @staticmethod
     def from_dict(movie_dict:dict):
         return Movie(

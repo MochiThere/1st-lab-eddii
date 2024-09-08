@@ -170,6 +170,30 @@ async function main() {
             btn.textContent = '>>>'
         }
     }
+
+    const deleteButton = document.getElementById('delete-node');
+    deleteButton.addEventListener('click', async function () {
+        const movieTitle = document.getElementById('movie-title').textContent;
+        
+        try {
+            const res = await fetch('/my-list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({title: movieTitle, action:'delete'}),
+            });
+
+            if ( !res.ok ){
+                console.error('Error enviando el titulo a eliminar')
+            }
+
+            treeContainer.innerHTML = visualizeTree(rootNode.root);
+        } catch ( error ) {
+            console.error('ERROR:', error);
+        }
+    });
+
 }
 
 main();

@@ -30,14 +30,29 @@ def main_page():
 @main.route('/my-list', methods=['GET', 'POST'])
 def my_list():
     if request.method == 'POST':
-        movie_obj = Movie.from_dict(request.json)
+        data = request.json
+        action = data.get('action')
+        movie_title = data.get('title')
 
-        temp_tree.insert(movie_obj)
-        tree_to_json(temp_tree)
+        if action == 'delete' and movie_title:
+            print(f'Borrando: {movie_title}')
+            res = temp_tree.delete(movie_title)
+            tree_to_json(temp_tree)
 
-        print(movie_obj)
+
+            if res:
+                return jsonify({'success': True, 'message': f'Movie {movie_title} deleted successfully'}), 200
+            else:
+                return jsonify({'success': False, 'message': f'Movie {movie_title} not found'}), 404
+
+        else:
+            movie_obj = Movie.from_dict(data)
+            temp_tree.insert(movie_obj)
+            tree_to_json(temp_tree)
+
 
     return render_template('my-list.html')
+
 
 @main.route('/explore')
 def explore():
