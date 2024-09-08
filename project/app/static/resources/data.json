@@ -1,17 +1,153 @@
 {
     "root": {
         "data": {
-            "title": "Jurassic Park III",
-            "worldwide": 368780809.0,
-            "domestic": 181171875.0,
-            "domestic_percent": 49.1,
-            "foreign": 187608934.0,
-            "foreign_percent": 50.9,
-            "year": 2001
+            "title": "Detroit Metal City",
+            "worldwide": 23744571.0,
+            "domestic": 0.0,
+            "domestic_percent": 0.0,
+            "foreign": 23744571.0,
+            "foreign_percent": 100.0,
+            "year": 2008
         },
         "balance": 0,
-        "left": null,
-        "right": null,
+        "left": {
+            "data": {
+                "title": "Bad Boys: Ride or Die",
+                "worldwide": 400124003.0,
+                "domestic": 193375986.0,
+                "domestic_percent": 48.3,
+                "foreign": 206748017.0,
+                "foreign_percent": 51.7,
+                "year": 2024
+            },
+            "balance": -1,
+            "left": {
+                "data": {
+                    "title": "Avengers: Infinity War",
+                    "worldwide": 2048359754.0,
+                    "domestic": 678815482.0,
+                    "domestic_percent": 33.1,
+                    "foreign": 1369544272.0,
+                    "foreign_percent": 66.9,
+                    "year": 2018
+                },
+                "balance": 1,
+                "left": null,
+                "right": {
+                    "data": {
+                        "title": "Bad Boys for Life",
+                        "worldwide": 426505244.0,
+                        "domestic": 206305244.0,
+                        "domestic_percent": 48.4,
+                        "foreign": 220200000.0,
+                        "foreign_percent": 51.6,
+                        "year": 2020
+                    },
+                    "balance": 0,
+                    "left": null,
+                    "right": null,
+                    "level": 3,
+                    "parent": "Avengers: Infinity War",
+                    "uncle": "Couples Retreat",
+                    "grandparent": "Bad Boys: Ride or Die"
+                },
+                "level": 2,
+                "parent": "Bad Boys: Ride or Die",
+                "uncle": "Doomsday: The Sinking of Japan",
+                "grandparent": "Detroit Metal City"
+            },
+            "right": {
+                "data": {
+                    "title": "Couples Retreat",
+                    "worldwide": 171844840.0,
+                    "domestic": 109204945.0,
+                    "domestic_percent": 63.5,
+                    "foreign": 62639895.0,
+                    "foreign_percent": 36.5,
+                    "year": 2009
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Bad Boys: Ride or Die",
+                "uncle": "Doomsday: The Sinking of Japan",
+                "grandparent": "Detroit Metal City"
+            },
+            "level": 1,
+            "parent": "Detroit Metal City",
+            "uncle": null,
+            "grandparent": null
+        },
+        "right": {
+            "data": {
+                "title": "Doomsday: The Sinking of Japan",
+                "worldwide": 51127401.0,
+                "domestic": 0.0,
+                "domestic_percent": 0.0,
+                "foreign": 51127401.0,
+                "foreign_percent": 100.0,
+                "year": 2006
+            },
+            "balance": 1,
+            "left": {
+                "data": {
+                    "title": "Doom",
+                    "worldwide": 58072119.0,
+                    "domestic": 28212337.0,
+                    "domestic_percent": 48.6,
+                    "foreign": 29859782.0,
+                    "foreign_percent": 51.4,
+                    "year": 2005
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Doomsday: The Sinking of Japan",
+                "uncle": "Bad Boys: Ride or Die",
+                "grandparent": "Detroit Metal City"
+            },
+            "right": {
+                "data": {
+                    "title": "Resident Evil: Retribution",
+                    "worldwide": 240159255.0,
+                    "domestic": 42345531.0,
+                    "domestic_percent": 17.6,
+                    "foreign": 197813724.0,
+                    "foreign_percent": 82.4,
+                    "year": 2012
+                },
+                "balance": -1,
+                "left": {
+                    "data": {
+                        "title": "Maison de retraite 2",
+                        "worldwide": 11196943.0,
+                        "domestic": 0.0,
+                        "domestic_percent": 0.0,
+                        "foreign": 11196943.0,
+                        "foreign_percent": 100.0,
+                        "year": 2024
+                    },
+                    "balance": 0,
+                    "left": null,
+                    "right": null,
+                    "level": 3,
+                    "parent": "Resident Evil: Retribution",
+                    "uncle": "Doom",
+                    "grandparent": "Doomsday: The Sinking of Japan"
+                },
+                "right": null,
+                "level": 2,
+                "parent": "Doomsday: The Sinking of Japan",
+                "uncle": "Bad Boys: Ride or Die",
+                "grandparent": "Detroit Metal City"
+            },
+            "level": 1,
+            "parent": "Detroit Metal City",
+            "uncle": null,
+            "grandparent": null
+        },
         "level": 0,
         "parent": null,
         "uncle": null,

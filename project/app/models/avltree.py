@@ -34,26 +34,35 @@ class AVLTree():
         if pointer is not None:
             #Caso 1: El nodo a eliminar no tiene hijos
             if (pointer.left is None and pointer.right is None):
-                if (parent.left == pointer):
-                    parent.left = None
+                if pointer == self.root:
+                    self.root = None
                 else:
-                    parent.right = None
+                    if (parent.left == pointer):
+                        parent.left = None
+                    else:
+                        parent.right = None
                 del pointer
 
             #Caso 2.1: El nodo a eliminar tiene un hijo a la izq
             elif (pointer.left is not None and pointer.right is None):
-                if parent.left == pointer:
-                    parent.left = pointer.left
+                if pointer == self.root:
+                    self.root = pointer.left
                 else:
-                    parent.right = pointer.left
+                    if parent.left == pointer:
+                        parent.left = pointer.left
+                    else:
+                        parent.right = pointer.left
                 del pointer
 
             #Caso 2.2: El nodo a eliminar tiene un hijo a la der
             elif (pointer.left is None and pointer.right is not None):
-                if parent.left == pointer:
-                    parent.left = pointer.right
+                if pointer == self.root:
+                    self.root = pointer.right
                 else:
-                    parent.right = pointer.right
+                    if parent.left == pointer:
+                        parent.left = pointer.right
+                    else:
+                        parent.right = pointer.right
                 del pointer
 
             #Caso 3: El nodo a eliminar tiene 2 hijos
@@ -61,7 +70,12 @@ class AVLTree():
                 sus: Node = self.__sus(pointer)[0]
                 sus_parent: Node = self.__sus(pointer)[1]
                 sus_son: Node = self.__sus(pointer)[2]
-                pointer.key = sus.key
+                if pointer == self.root:
+                    self.root.data = sus.data
+                    self.root.key = sus.key
+                else: 
+                    pointer.data = sus.data
+                    pointer.key = sus.key
                 if pointer == sus_parent:
                     sus_parent.right = sus_son
                 else:
@@ -108,19 +122,19 @@ class AVLTree():
     
     def node_family (self, node:Node) -> list[str]:
         if node is None:
-            return None
+            return None, None, None
         
         parent : Node = self.search(node.key)[1]
         if parent is None:
-            return [None,None,None] 
+            return [None, None, None]
         
         grand_parent : Node = self.search(parent.key)[1]
         if grand_parent is None:
             return [parent.key,None,None]
         
         if (grand_parent.left == parent):
-            return parent.key, grand_parent.key, grand_parent.right.key
-        return parent.key, grand_parent.key, grand_parent.left.key
+            return [parent.key, grand_parent.key, grand_parent.right.key]
+        return [parent.key, grand_parent.key, grand_parent.left.key]
     
     def node_level (self, node) -> int:
         pointer = self.root
@@ -157,9 +171,15 @@ class AVLTree():
                 aux = self.double_left_right_rotation(pointer)
             elif pointer.balance == 2 and pointer.right.balance == -1:
                 aux = self.double_right_left_rotation(pointer)
-            else:
+            elif pointer.balance == 2 and pointer.right.balance == 0:
                 aux = self.simple_left_rotation(pointer)
+            elif pointer.balance == -2 and pointer.left.balance == 0:
+                aux = self.simple_right_rotation(pointer)
+            else:
+                print("que haces aqui fred")
                 
+            #reajuste de los balances hijos (no hay posibilidad de desbalance porque ya se hicieron las rotaciones)
+            self.calculate_sub_tree_balance(aux)
             #reasignar raiz / aux
             if (pointer == self.root):
                 self.root = aux
@@ -175,6 +195,12 @@ class AVLTree():
         if node is not None:
             return self.height(node.right) - self.height(node.left)
         return 0
+    
+    def calculate_sub_tree_balance(self, node):
+        if node is not None:
+            node.balance = self.calculate_node_balance(node)
+            self.calculate_sub_tree_balance(node.left)
+            self.calculate_sub_tree_balance(node.right)
     
     def calculate_ascendance (self, node: Node) -> list:
         unbalances = []
