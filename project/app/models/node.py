@@ -9,4 +9,3 @@ class Node:
         self.right: Node = None
         self.balance: int = 0
         
-        

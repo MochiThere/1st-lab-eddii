@@ -70,18 +70,22 @@ options.forEach(option => {
   });
 });
 
+let nodeDataStore = {};
 
 const visualizeTree = ( node ) => {
     // Si el nodo es null no mostrar
     if (!node) return '';
 
     const { data, left, right, balance } = node;
-    console.log(data)
+    const nodeId = `node_${data.title.replace(/\s+/g, '_').toLowerCase()}`;
 
-    const encodedData = JSON.stringify(data);
+    nodeDataStore[nodeId] = node;
+
+    const encodedData = JSON.stringify(node);
+    console.log(node)
 
     return `
-            <div class="node__element" onclick='displayData(${encodedData},${balance})'> ${data.title} </div>
+            <div class="node__element" onclick='displayData(${nodeId})'> ${data.title} </div>
             <p class="lbl-balance">${balance}</p>
             ${ // En caso de tener un hijo
                 left || right ? 
@@ -113,8 +117,12 @@ const visualizeTree = ( node ) => {
     `
 }
 
-function displayData ( movieData, balance ){
-    console.log(movieData)
+function displayData(nodeId) {
+    const movieData = nodeDataStore[nodeId];  // Retrieve the data using the ID
+    if (!movieData) return;
+
+    console.log(movieData);
+    
     const movieTitle = document.getElementById('movie-title');
     const yearElement = document.querySelector('.movie-info li:nth-child(1)');
     const foreignElement = document.querySelector('.movie-info li:nth-child(2)');
@@ -122,28 +130,27 @@ function displayData ( movieData, balance ){
     const worldwideElement = document.querySelector('.movie-info li:nth-child(4)');
     const foreignPercentElement = document.querySelector('.movie-info li:nth-child(5)');
     const domesticPercentElement = document.querySelector('.movie-info li:nth-child(6)');
-    
+
     const levelElement = document.querySelector('.node-info li:nth-child(1)');
     const balanceElement = document.querySelector('.node-info li:nth-child(2)');
     const parentElement = document.querySelector('.node-info li:nth-child(3)');
     const uncleElement = document.querySelector('.node-info li:nth-child(4)');
     const grandparentElement = document.querySelector('.node-info li:nth-child(5)');
 
-    movieTitle.textContent = movieData.title;
-    yearElement.innerHTML = `Year: ${movieData.year}`;
-    foreignElement.innerHTML = `Foreign Earnings: $${movieData.foreign}`;
-    domesticElement.innerHTML = `Domestic Earnings: $${movieData.domestic}`;
-    worldwideElement.innerHTML = `Worldwide Earnings: $${movieData.worldwide}`;
-    foreignPercentElement.innerHTML = `Foreign Percent Earnings: ${movieData.foreign_percent}%`;
-    domesticPercentElement.innerHTML = `Domestic Percent Earnings: ${movieData.domestic_percent}%`;
+    movieTitle.textContent = movieData.data.title;
+    yearElement.innerHTML = `Year: ${movieData.data.year}`;
+    foreignElement.innerHTML = `Foreign Earnings: $${movieData.data.foreign}`;
+    domesticElement.innerHTML = `Domestic Earnings: $${movieData.data.domestic}`;
+    worldwideElement.innerHTML = `Worldwide Earnings: $${movieData.data.worldwide}`;
+    foreignPercentElement.innerHTML = `Foreign Percent Earnings: ${movieData.data.foreign_percent}%`;
+    domesticPercentElement.innerHTML = `Domestic Percent Earnings: ${movieData.data.domestic_percent}%`;
 
-    /*levelElement.innerHTML = `Nivel: ${getLevelOfNode(movieData)}`;
-    balanceElement.innerHTML = `Balance: ${balance}`;
-    parentElement.innerHTML = `Nodo Padre: ${getParentNode(movieData)}`;
-    uncleElement.innerHTML = `Nodo Tio: ${getUncleNode(movieData)}`; 
-    grandparentElement.innerHTML = `Nodo Abuelo: ${getGrandparentNode(movieData)}`;*/
+    levelElement.innerHTML = `Nivel: ${movieData.level || 'N/A'}`;
+    balanceElement.innerHTML = `Balance: ${movieData.balance}`;
+    parentElement.innerHTML = `Nodo Padre: ${movieData.parent || 'N/A'}`;
+    uncleElement.innerHTML = `Nodo Tio: ${movieData.uncle || 'N/A'}`; 
+    grandparentElement.innerHTML = `Nodo Abuelo: ${movieData.grandparent || 'N/A'}`;
 }
-
 async function main() {
     const rootNode = await loadTreeFromJSON();
 
@@ -154,6 +161,22 @@ async function main() {
     } else {
         console.error('No se pudo cargar el árbol AVL.');
     }
+
+    const performSearch = document.getElementById('btn-search')
+    performSearch.addEventListener('click', function () {
+        const flairs = searchInput.value.trim();
+        
+        loadTreeFromJSON().then(tree => {
+            if (tree && tree.root) {
+                const filtered = filterBy(tree.root, flairs)
+
+                const treeContainer = document.getElementById('tree')
+                treeContainer.innerHTML = '';
+
+                treeContainer.innerHTML += visualizeTree(tree.root)
+            }
+        });
+    });
 
     const btn = document.getElementById('hide');
     const movieDataContainer = document.querySelector('.movie-data-container');

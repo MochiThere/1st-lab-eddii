@@ -6,7 +6,7 @@ csv_path = "project/app/static/resources/dataset_movies.csv"
 def search_in_csv (title: str) -> tuple[bool, list[Movie]]:
     movies = []
 
-    with open(csv_path, "r") as csv_file:
+    with open(csv_path, "r", encoding='utf-8') as csv_file:
         csv_reader = reader(csv_file)
         next(csv_reader)
 

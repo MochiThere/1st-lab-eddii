@@ -106,6 +106,33 @@ class AVLTree():
             sus, sus_parent = sus.left, sus
         return sus, sus_parent, sus.right
 
+    def node_family (self, node:Node) -> list[str]:
+        if node is None:
+            return None
+        
+        parent : Node = self.search(node.key)[1]
+        if parent is None:
+            return [None,None,None] 
+        
+        grand_parent : Node = self.search(parent.key)[1]
+        if grand_parent is None:
+            return [parent.key,None,None]
+        
+        if (grand_parent.left == parent):
+            return parent.key, grand_parent.key, grand_parent.right.key
+        return parent.key, grand_parent.key, grand_parent.left.key
+    
+    def node_level (self, node) -> int:
+        pointer = self.root
+        level = 0
+        while pointer != node:
+            if node.key < pointer.key:
+                pointer = pointer.left
+            else:
+                pointer = pointer.right
+            level += 1
+        return level
+            
     # Relacionadas al balanceo (AVL) =================================
     
     def rebalance (self, node: Node) -> None:
@@ -389,5 +416,9 @@ class AVLTree():
             "data": node.data.to_dict(),
             "balance": node.balance,
             "left": self.__dict(node.left),
-            "right": self.__dict(node.right)
+            "right": self.__dict(node.right),
+            "level" : self.node_level(node),
+            "parent": self.node_family(node)[0],
+            "uncle" : self.node_family(node)[2],
+            "grandparent" : self.node_family(node)[1]
         }

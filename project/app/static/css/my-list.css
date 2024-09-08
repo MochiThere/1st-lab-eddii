@@ -377,10 +377,10 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
-
 }
 
 .info {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -393,9 +393,16 @@ html, body {
 }
 
 .info ul {
+    box-sizing: border-box;
+    width: 100%;
     padding: 0.5rem 2rem;
     margin: 0;
     list-style: none;
+}
+
+.info ul li {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .action-container {
