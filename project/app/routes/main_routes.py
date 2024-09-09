@@ -9,7 +9,6 @@ temp_tree = AVLTree()
 @main.route('/profiles')
 def profiles():
     first_elements = [movie.to_dict() for movie in csv_head(10)]
-    print(f'\033[1;32m{first_elements}\033[0m',end="\n")
 
     session['first'] = first_elements
 
@@ -23,7 +22,6 @@ def main_page():
         query = request.form.get('text-area')
 
         filtered_sample = [movie.to_dict() for movie in search_in_csv(query)[1]]
-        print(f'\033[1;32m{filtered_sample}\033[0m',end="\n")
 
         session['results'] = filtered_sample
 
@@ -62,6 +60,8 @@ def my_list():
             movie_obj = Movie.from_dict(data)
             temp_tree.insert(movie_obj)
             tree_to_json(temp_tree)
+    
+    print(temp_tree)
 
     return render_template('my-list.html')
 
