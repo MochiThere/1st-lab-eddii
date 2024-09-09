@@ -38,9 +38,9 @@
     <main>
         <div class="preview-container">
             <div class="content-container">
-                <h1 class="content-title">Text Placeholder</h1>
+                <h1 class="content-title">Mission Impossible II</h1>
                 <p class="content-desc">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, natus sint fugit soluta architecto saepe quasi harum? Saepe ea nihil, excepturi voluptas recusandae laboriosam. Adipisci quasi ab odio corrupti?
+                    When a rogue former agent threatens to deploy a deadly biological weapon, superspy Ethan Hunt races across the globe to stop him. Watch all you want. Tom Cruise, Dougray Scott and Thandiwe Newton star in this stunt-filled action spectacle from director John Woo.
                 </p>
                 <div class="action-container">
                     <button class="primary-action-button">Reproducir</button>
@@ -62,12 +62,33 @@
         window.location.href = "{{ url_for('main.profiles') }}";
         };
 
+        const first = JSON.parse('{{ first | tojson | safe }}');
+        console.log(first);
+        createMovieCarousel(first);
+
         const icon = document.getElementById('search-icon');
         const search = document.getElementById('search-container');
 
         icon.onclick = function () {
             console.log("clicked");
             search.classList.toggle('active');
+        }
+
+        function sendMovie(movie) {   
+            fetch('/my-list', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(movie) 
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         }
 
         const input = document.getElementById('text-area');

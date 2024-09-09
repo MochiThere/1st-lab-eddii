@@ -26,7 +26,7 @@ def search_in_csv(title: str) -> tuple[bool, list[Movie]]:
     return (False, []) if not movies else (True, movies)
 
 
-def csv_head(base: int = 0, path: str = csv_path) -> list:
+def csv_head(base: int = 0, path: str = csv_path) -> list[Movie]:
     with open(path, 'r', encoding='utf-8') as csv_file:
         csv_reader = list(reader(csv_file))[2:] 
         

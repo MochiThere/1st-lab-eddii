@@ -8,10 +8,17 @@ temp_tree = AVLTree()
 
 @main.route('/profiles')
 def profiles():
-    return render_template('profiles.html')
+    first_elements = [movie.to_dict() for movie in csv_head(10)]
+    print(f'\033[1;32m{first_elements}\033[0m',end="\n")
+
+    session['first'] = first_elements
+
+    return redirect(url_for('main.main_page'))
 
 @main.route('/browse', methods=['GET', 'POST'])
 def main_page():
+    first_elements = session.get('first', [])
+
     if request.method == 'POST':
         query = request.form.get('text-area')
 
@@ -23,7 +30,7 @@ def main_page():
         return redirect(url_for('main.explore'))
     else:
         print("didn't entered")
-        return render_template('main-page.html')
+        return render_template('main-page.html', first= first_elements)
 
 @main.route('/my-list', methods=['GET', 'POST'])
 def my_list():

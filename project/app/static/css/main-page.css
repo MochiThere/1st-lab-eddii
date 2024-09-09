@@ -237,7 +237,7 @@ main {
 
     background-image: 
         linear-gradient(to bottom, #141414, rgba(0, 0, 0, 0) 50%, #141414),
-        url('../../static/images/normal-image.jpeg');
+        url('https://images.mubicdn.net/images/film/29889/cache-20880-1547688838/image-w1280.jpg?size=800x');
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -250,10 +250,10 @@ main {
 .content-container {
     box-sizing: border-box;
     width: 35%;
+    height: 100%;
     min-width: 20rem;
 
-    padding-left: 4rem;
-    padding-bottom: 4rem;
+    padding: 4rem;
     
     display: flex;
     flex-direction: column;
@@ -261,9 +261,9 @@ main {
     align-items: start;
     gap: 2vh;
 
-
-    color: #FAFAFA;
-    font-size: 1.2vw;
+    background: radial-gradient(#141414 50%, transparent 75%);
+    font-size: 1.1vw;
+    color:#BBB;
     font-family: 'Calibri';
 
     overflow: visible;
@@ -272,6 +272,8 @@ main {
 }
 
 .content-title {
+    color: #FAFAFA;
+    margin-bottom: 1rem;
     line-height: 0.8;
     font-size: 5vw;
 }
