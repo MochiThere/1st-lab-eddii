@@ -25,10 +25,13 @@ def search_in_csv(title: str) -> tuple[bool, list[Movie]]:
     
     return (False, []) if not movies else (True, movies)
 
-
 def csv_head(base: int = 0, path: str = csv_path) -> list[Movie]:
+    from random import randint
+    #Numero aleatorio con nombre cuestionable usado como inicio del head
+    wasa = randint(2, 4000-base)
+    
     with open(path, 'r', encoding='utf-8') as csv_file:
-        csv_reader = list(reader(csv_file))[2:] 
+        csv_reader = list(reader(csv_file))[wasa:wasa+base] 
         
         movies = [Movie(
             title=row[0],
@@ -40,4 +43,4 @@ def csv_head(base: int = 0, path: str = csv_path) -> list[Movie]:
             year=int(row[6])
         ) for row in csv_reader]
         
-        return movies[:base] if base > 0 else movies
+        return movies

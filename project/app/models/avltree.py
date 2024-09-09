@@ -2,6 +2,11 @@ from .movie import Movie
 from .node import Node
 
 class AVLTree():
+    """
+        Cuando empezamos a hacer esta clase solo Dios y nosotros sabíamos como funcionaban los balanceos...
+        Ahora solo Dios sabe. 
+        Atte: devs
+    """
 
     def __init__(self, root:Node= None) -> None:
         self.root = root
@@ -10,8 +15,6 @@ class AVLTree():
     
     def insert(self, movie:Movie) -> bool:
         to_insert = Node(movie)
-
-        # Inserción común
         if self.root is None:
             self.root = to_insert
             return True
@@ -122,19 +125,24 @@ class AVLTree():
     
     def node_family (self, node:Node) -> list[str]:
         if node is None:
-            return None, None, None
-        
-        parent : Node = self.search(node.key)[1]
-        if parent is None:
             return [None, None, None]
-        
-        grand_parent : Node = self.search(parent.key)[1]
-        if grand_parent is None:
-            return [parent.key,None,None]
-        
-        if (grand_parent.left == parent):
-            return [parent.key, grand_parent.key, grand_parent.right.key]
-        return [parent.key, grand_parent.key, grand_parent.left.key]
+        else:
+            parent : Node = self.search(node.key)[1]
+            if parent is None:
+                return [None, None, None]
+            else:
+                grand_parent : Node = self.search(parent.key)[1]
+                if grand_parent is None:
+                    return [parent.key,None,None]
+                else:
+                    if grand_parent.left and grand_parent.right:
+                        if (grand_parent.left == parent):
+                            return [parent.key, grand_parent.key, grand_parent.right.key] 
+                        else:
+                            return [parent.key, grand_parent.key, grand_parent.left.key]
+                    else: 
+                        return [parent.key, grand_parent.key, None]
+
     
     def node_level (self, node) -> int:
         pointer = self.root
@@ -210,13 +218,6 @@ class AVLTree():
                 unbalances.append(node)
             node = self.search(node.key)[1]
         return unbalances
-
-    def print_balances_inorder (self, node):
-        if node is not None:
-            self.print_balances_inorder(node.left)
-            node.balance = self.calculate_node_balance(node)
-            print("balance " + str(node.key) + ": " + str(node.balance))
-            self.print_balances_inorder(node.right)
             
     # Rotaciones ======================================================
 

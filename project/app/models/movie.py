@@ -8,6 +8,7 @@ class Movie:
         self.foreign_percent_earnings: float = forpe
         self.year: int = year
     
+    #Convierte de Movie a dictionary
     def to_dict(self):
         return {
             "title": self.title,
@@ -22,6 +23,7 @@ class Movie:
     def __repr__(self) -> str:
         return self.title
     
+    #Convierte de dictionary a Movie
     @staticmethod
     def from_dict(movie_dict:dict):
         return Movie(
