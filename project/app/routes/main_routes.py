@@ -13,7 +13,7 @@ def profiles():
 
     session['first'] = first_elements
 
-    return redirect(url_for('main.main_page'))
+    return render_template("profiles.html")
 
 @main.route('/browse', methods=['GET', 'POST'])
 def main_page():
