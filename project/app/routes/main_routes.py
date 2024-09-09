@@ -3,8 +3,8 @@ from ..models import *
 from ..utils import *
 
 main = Blueprint('main', __name__)
-temp_tree = AVLTree()
 
+temp_tree = AVLTree()
 
 @main.route('/profiles')
 def profiles():
@@ -12,8 +12,6 @@ def profiles():
 
 @main.route('/browse', methods=['GET', 'POST'])
 def main_page():
-    sample: AVLTree = AVLTree().test_tree() 
-
     if request.method == 'POST':
         query = request.form.get('text-area')
 

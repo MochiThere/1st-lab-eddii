@@ -1,17 +1,136 @@
 {
     "root": {
         "data": {
-            "title": "City of God",
-            "worldwide": 30641770.0,
-            "domestic": 7564459.0,
-            "domestic_percent": 24.7,
-            "foreign": 23077311.0,
-            "foreign_percent": 75.3,
-            "year": 2002
+            "title": "Christmas in Love",
+            "worldwide": 22668087.0,
+            "domestic": 0.0,
+            "domestic_percent": 0.0,
+            "foreign": 22668087.0,
+            "foreign_percent": 100.0,
+            "year": 2004
         },
-        "balance": 0,
-        "left": null,
-        "right": null,
+        "balance": 1,
+        "left": {
+            "data": {
+                "title": "Charlie Wilson`s War",
+                "worldwide": 119483446.0,
+                "domestic": 66661095.0,
+                "domestic_percent": 55.8,
+                "foreign": 52822351.0,
+                "foreign_percent": 44.2,
+                "year": 2007
+            },
+            "balance": 0,
+            "left": {
+                "data": {
+                    "title": "Boruto? Naruto the Movie",
+                    "worldwide": 38362448.0,
+                    "domestic": 919651.0,
+                    "domestic_percent": 2.4,
+                    "foreign": 37442797.0,
+                    "foreign_percent": 97.6,
+                    "year": 2015
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Charlie Wilson`s War",
+                "uncle": "Miss Congeniality",
+                "grandparent": "Christmas in Love"
+            },
+            "right": {
+                "data": {
+                    "title": "Charlie and the Chocolate Factory",
+                    "worldwide": 474968763.0,
+                    "domestic": 206459076.0,
+                    "domestic_percent": 43.5,
+                    "foreign": 268509687.0,
+                    "foreign_percent": 56.5,
+                    "year": 2005
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Charlie Wilson`s War",
+                "uncle": "Miss Congeniality",
+                "grandparent": "Christmas in Love"
+            },
+            "level": 1,
+            "parent": "Christmas in Love",
+            "uncle": null,
+            "grandparent": null
+        },
+        "right": {
+            "data": {
+                "title": "Miss Congeniality",
+                "worldwide": 212742720.0,
+                "domestic": 106807667.0,
+                "domestic_percent": 50.2,
+                "foreign": 105935053.0,
+                "foreign_percent": 49.8,
+                "year": 2000
+            },
+            "balance": 0,
+            "left": {
+                "data": {
+                    "title": "Mad Love",
+                    "worldwide": 9306362.0,
+                    "domestic": 280046.0,
+                    "domestic_percent": 3.0,
+                    "foreign": 9026316.0,
+                    "foreign_percent": 97.0,
+                    "year": 2001
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Miss Congeniality",
+                "uncle": "Charlie Wilson`s War",
+                "grandparent": "Christmas in Love"
+            },
+            "right": {
+                "data": {
+                    "title": "Naruto the Movie? Ninja Clash in the Land of Snow",
+                    "worldwide": 11141307.0,
+                    "domestic": 0.0,
+                    "domestic_percent": 0.0,
+                    "foreign": 11141307.0,
+                    "foreign_percent": 100.0,
+                    "year": 2004
+                },
+                "balance": -1,
+                "left": {
+                    "data": {
+                        "title": "Miss Potter",
+                        "worldwide": 35078241.0,
+                        "domestic": 3005605.0,
+                        "domestic_percent": 8.6,
+                        "foreign": 32072636.0,
+                        "foreign_percent": 91.4,
+                        "year": 2006
+                    },
+                    "balance": 0,
+                    "left": null,
+                    "right": null,
+                    "level": 3,
+                    "parent": "Naruto the Movie? Ninja Clash in the Land of Snow",
+                    "uncle": "Mad Love",
+                    "grandparent": "Miss Congeniality"
+                },
+                "right": null,
+                "level": 2,
+                "parent": "Miss Congeniality",
+                "uncle": "Charlie Wilson`s War",
+                "grandparent": "Christmas in Love"
+            },
+            "level": 1,
+            "parent": "Christmas in Love",
+            "uncle": null,
+            "grandparent": null
+        },
         "level": 0,
         "parent": null,
         "uncle": null,
