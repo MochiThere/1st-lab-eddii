@@ -1,3 +1,71 @@
 {
-    "root": null
+    "root": {
+        "data": {
+            "title": "Take the Lead",
+            "worldwide": 66499627.0,
+            "domestic": 34742066.0,
+            "domestic_percent": 52.2,
+            "foreign": 31757561.0,
+            "foreign_percent": 47.8,
+            "year": 2006
+        },
+        "balance": -1,
+        "left": {
+            "data": {
+                "title": "Fearless",
+                "worldwide": 68072848.0,
+                "domestic": 24633730.0,
+                "domestic_percent": 36.2,
+                "foreign": 43439118.0,
+                "foreign_percent": 63.8,
+                "year": 2006
+            },
+            "balance": 1,
+            "left": null,
+            "right": {
+                "data": {
+                    "title": "Flags of Our Fathers",
+                    "worldwide": 65900249.0,
+                    "domestic": 33602376.0,
+                    "domestic_percent": 51.0,
+                    "foreign": 32297873.0,
+                    "foreign_percent": 49.0,
+                    "year": 2006
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Fearless",
+                "uncle": "When a Stranger Calls",
+                "grandparent": "Take the Lead"
+            },
+            "level": 1,
+            "parent": "Take the Lead",
+            "uncle": null,
+            "grandparent": null
+        },
+        "right": {
+            "data": {
+                "title": "When a Stranger Calls",
+                "worldwide": 67062123.0,
+                "domestic": 47860214.0,
+                "domestic_percent": 71.4,
+                "foreign": 19201909.0,
+                "foreign_percent": 28.6,
+                "year": 2006
+            },
+            "balance": 0,
+            "left": null,
+            "right": null,
+            "level": 1,
+            "parent": "Take the Lead",
+            "uncle": null,
+            "grandparent": null
+        },
+        "level": 0,
+        "parent": null,
+        "uncle": null,
+        "grandparent": null
+    }
 }
