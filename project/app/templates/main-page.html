@@ -61,6 +61,9 @@
     </main>
 
     <script>
+        const API_KEY = 'dbf114ecc3aed62ed784b28b37b786e2';
+        const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+        
         document.getElementById('btn-profile').onclick = function() {
         window.location.href = "{{ url_for('main.profiles') }}";
         };
@@ -118,55 +121,81 @@
             }
         });
     
-        function createMovieCarousel(results) {
+        async function createMovieCarousel(results) {
             const exploreGallery = document.querySelector('.explore-video-gallery');
-            
             exploreGallery.innerHTML = '';
-    
+        
             for (let i = 0; i < results.length; i += 5) {
                 const carouselContainer = document.createElement('div');
                 carouselContainer.classList.add('carousel-container');
-    
+        
                 const group = results.slice(i, i + 5);
-                group.forEach((movie) => {
+        
+                for (let movie of group) {
                     const movieCard = document.createElement('div');
                     movieCard.classList.add('movie-card');
-                    
+        
                     const imageContainer = document.createElement('div');
                     imageContainer.classList.add('image-container');
-                    
+        
                     const movieTitle = document.createElement('h2');
                     movieTitle.classList.add('movie-title');
                     movieTitle.textContent = movie.title;
-    
+        
                     const cardExpanded = document.createElement('div');
                     cardExpanded.classList.add('card-expanded');
-    
+        
                     const expandedContent = document.createElement('div');
                     expandedContent.classList.add('expanded-content');
-    
+        
                     const addButton = document.createElement('button');
                     addButton.classList.add('add-button');
-    
                     addButton.addEventListener('click', function () {
                         sendMovie(movie);
-    
                         addButton.disabled = true;
                         addButton.classList.add('checked');
                     });
-    
+        
                     expandedContent.appendChild(addButton);
                     cardExpanded.appendChild(expandedContent);
-    
+        
                     movieCard.appendChild(imageContainer);
                     movieCard.appendChild(movieTitle);
                     movieCard.appendChild(cardExpanded);
-    
+        
                     carouselContainer.appendChild(movieCard);
-                });
-    
+        
+                    const posterUrl = await fetchMoviePoster(movie.title);
+                    if (posterUrl) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = posterUrl;
+                        imgElement.alt = `${movie.title} Poster`;
+                        imageContainer.appendChild(imgElement);
+                    } else {
+                        imageContainer.textContent = 'No poster available';
+                    }
+                }
+        
                 exploreGallery.appendChild(carouselContainer);
             }
+        }
+
+        async function fetchMoviePoster(title) {
+            const url = `${TMDB_BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(title)}`;
+        
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+            
+                if (data.results && data.results.length > 0) {
+                    const posterPath = data.results[0].poster_path;
+                    return posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : null; // TMDb image base URL
+                }
+            } catch (error) {
+                console.error('Error fetching movie poster:', error);
+            }
+
+            return null;
         }
     </script>
 </body>
