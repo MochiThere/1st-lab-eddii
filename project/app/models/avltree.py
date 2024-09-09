@@ -83,9 +83,10 @@ class AVLTree():
                     sus_parent.right = sus_son
                 else:
                     sus_parent.left = sus_son
-                del sus
-                
+                del sus    
             self.rebalance(self.search(element_key)[1])
+            self.head(self.count_nodes(self.root))
+            self.calculate_sub_tree_balance(self.root)
             return True
         return False    
     
@@ -186,8 +187,8 @@ class AVLTree():
             else:
                 print("que haces aqui fred")
                 
-            #reajuste de los balances hijos (no hay posibilidad de desbalance porque ya se hicieron las rotaciones)
-            self.calculate_sub_tree_balance(aux)
+            #reajuste de los balances hijos
+            self.calculate_sub_tree_balance(pointer)
             #reasignar raiz / aux
             if (pointer == self.root):
                 self.root = aux
@@ -196,8 +197,8 @@ class AVLTree():
                     parent.right = aux
                 else:
                     parent.left = aux
-            #recalcular la lista de desbalances
             unbalances = self.calculate_ascendance(pointer)
+            
             
     def calculate_node_balance (self, node: Node = None) -> int:
         if node is not None:
@@ -279,6 +280,14 @@ class AVLTree():
             
     # Utilidades ======================================================
 
+    def count_nodes(self, node):
+        if node is None:
+            return 0
+        # La cuenta es 1 (nodo actual) más la cantidad de nodos en sus hijos
+        return 1 + self.count_nodes(node.left) + self.count_nodes(node.right)
+            
+            
+        
     def search_and_filter(self, query: str):
         filtered = AVLTree()
 
