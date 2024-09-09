@@ -70,6 +70,29 @@ options.forEach(option => {
   });
 });
 
+const searchButton = document.getElementById('btn-search');
+searchButton.addEventListener('click', async function () {
+    const searchQuery = document.getElementById('search-input').value;
+
+    try {
+        const res = await fetch('/my-list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ query: searchQuery, action: 'search' }),
+        });
+
+        if (!res.ok) {
+            console.error('Error enviando el query de búsqueda');
+            return;
+        }
+    } catch (error) {
+        console.error('ERROR:', error);
+    }
+
+    window.location.reload();
+});
 
 const visualizeTree = (node) => {
     // Si el nodo es null no mostrar
@@ -170,30 +193,6 @@ async function main() {
             btn.textContent = '>>>'
         }
     }
-
-    const deleteButton = document.getElementById('delete-node');
-    deleteButton.addEventListener('click', async function () {
-        const movieTitle = document.getElementById('movie-title').textContent;
-        
-        try {
-            const res = await fetch('/my-list', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({title: movieTitle, action:'delete'}),
-            });
-
-            if ( !res.ok ){
-                console.error('Error enviando el titulo a eliminar')
-            }
-
-            treeContainer.innerHTML = visualizeTree(rootNode.root);
-        } catch ( error ) {
-            console.error('ERROR:', error);
-        }
-    });
-
 }
 
 main();

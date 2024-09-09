@@ -1,4 +1,8 @@
-from utils import search_in_csv
+from models import *
 
 if __name__ == '__main__':
-    print(search_in_csv('What'))
+    sample = AVLTree().test_tree()
+    print(sample)
+    print("============================================================")
+    filtered = sample.search_and_filter("min:146100000")
+    print(filtered)

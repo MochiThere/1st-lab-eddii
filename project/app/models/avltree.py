@@ -278,6 +278,106 @@ class AVLTree():
             
     # Utilidades ======================================================
 
+    def search_and_filter(self, query: str):
+        filtered = AVLTree()
+
+        # Si el query contiene ambos OR y AND, imprimir un error y retornar
+        if " OR AND " in query or " AND OR " in query:
+            print('Que te pasa animal')
+            return filtered
+
+        # Inicializar variables
+        spec_year: int = None
+        spec_min_income: float = None
+        loved: bool = None
+        name: str = ""
+        flairs: list[str] = []
+
+        # Si el query está vacío, devolver el árbol original
+        if not query.strip():
+            return self
+
+        # Extraer los datos del query
+        try:
+            for flair in query.split(" "):
+                # Analizar cada parte del query
+                if " OR " in flair or " AND " in flair:
+                    flairs.append(flair)
+                    continue
+
+                if ":" not in flair:
+                    name += flair
+                    continue
+
+                if "year:" in flair:
+                    try:
+                        spec_year = int(flair.split("year:")[1].strip())
+                        flairs.append(flair)
+                        continue
+                    except ValueError:
+                        print("Formato de año inválido")
+                        return []
+
+                if "min:" in flair:
+                    try:
+                        spec_min_income = float(flair.split("min:")[1].strip())
+                        flairs.append(flair)
+                        continue
+                    except ValueError:
+                        print("Formato de ingreso mínimo inválido")
+                        return []
+
+                if "loved:true" in query:
+                    loved = True
+                    flairs.append(flair)
+                    continue
+                elif "loved:false" in query:
+                    loved = False
+                    flairs.append(flair)
+                    continue
+
+        except ValueError:
+            print("No encontrado o entrada incorrecta")
+            return []
+
+        # Función recursiva para filtrar nodos
+        def _filter_nodes(node):
+            if node is None:
+                return None
+
+            # Extraer la información del nodo
+            m_name = node.key
+            m_year = node.data.year
+            m_income = node.data.foreign_earnings
+            m_loved = node.data.domestic_percent_earnings >= node.data.foreign_percent_earnings
+
+            # Evaluar las condiciones
+            year_chk = (spec_year is None or m_year >= spec_year)
+            income_chk = (spec_min_income is None or m_income >= spec_min_income)
+            loved_chk = True if loved is None else (m_loved == loved)
+
+            # Si hay un nombre, combinar las condiciones de nombre y año
+            if name:
+                if name.lower() in m_name.lower().replace(' ', '') and year_chk and income_chk and loved_chk:
+                    filtered.insert(node.data)
+            else:
+                # Si no hay nombre, solo evaluar año, ingresos y loved
+                if year_chk and income_chk and loved_chk:
+                    filtered.insert(node.data)
+
+            # Filtrar de manera recursiva los nodos a la izquierda y derecha
+            _filter_nodes(node.left)
+            _filter_nodes(node.right)
+
+        # Iniciar el filtrado desde la raíz
+        _filter_nodes(self.root)
+
+        # Si no hay coincidencias y no se usan flairs, devolver el árbol original
+        if not flairs and not name:
+            return self
+
+        return filtered
+
     def test_tree(self):
         movies = [
             Movie("Mission: Impossible II", 546388108, 215409889, 39.4, 330978219, 60.6, 2000),
@@ -290,6 +390,8 @@ class AVLTree():
             Movie("The Perfect Storm", 328718434, 182618434, 55.6, 146100000, 44.4, 2021),
             Movie("X-Men", 296339528, 157299718, 53.1, 139039810, 46.9, 2000),
             Movie("What Lies Beneath", 291420351, 155464351, 53.3, 135956000, 46.7, 2011),
+            Movie("Dinosaurs in the moon", 349822765, 137748063, 39.4, 212074702, 60.6, 2020),
+            Movie("Dinosaur and a kid", 349822765, 137748063, 39.4, 212074702, 60.6, 2021),
         ]
         
         for movie in movies:
@@ -420,11 +522,11 @@ class AVLTree():
         color_title = "\033[1;37m"   
 
         if side == "root":
-            result = f"{indent}{color_root}(root){color_reset} -> {color_title}{node.data.title}{color_reset}\n"
+            result = f"{indent}{color_root}(root){color_reset} -> {color_title}{node.data.title}{color_reset} {node.data.year} || {node.data.foreign_earnings}\n"
         elif side == "left":
-            result = f"{indent}{color_left}(left){color_reset} -> {color_title}{node.data.title}{color_reset}\n"
+            result = f"{indent}{color_left}(left){color_reset} -> {color_title}{node.data.title}{color_reset} {node.data.year} || {node.data.foreign_earnings}\n"
         else:  # right
-            result = f"{indent}{color_right}(right){color_reset} -> {color_title}{node.data.title}{color_reset}\n"
+            result = f"{indent}{color_right}(right){color_reset} -> {color_title}{node.data.title}{color_reset} {node.data.year} || {node.data.foreign_earnings}\n"
         
         result += self.__print_tree(node.left, level + 1, "left")
         result += self.__print_tree(node.right, level + 1, "right")

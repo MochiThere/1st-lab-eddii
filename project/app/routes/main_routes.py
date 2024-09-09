@@ -39,17 +39,24 @@ def my_list():
             res = temp_tree.delete(movie_title)
             tree_to_json(temp_tree)
 
-
             if res:
                 return jsonify({'success': True, 'message': f'Movie {movie_title} deleted successfully'}), 200
             else:
                 return jsonify({'success': False, 'message': f'Movie {movie_title} not found'}), 404
+        
+        elif action == 'search':
+            query = data.get('query')
+            print(f"Buscando:{query}")
+
+            filtered_tree = temp_tree.search_and_filter(query)
+            print(filtered_tree)
+            tree_json = tree_to_json(filtered_tree)
+            return jsonify(tree_json)
 
         else:
             movie_obj = Movie.from_dict(data)
             temp_tree.insert(movie_obj)
             tree_to_json(temp_tree)
-
 
     return render_template('my-list.html')
 
