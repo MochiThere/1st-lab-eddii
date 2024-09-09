@@ -66,6 +66,24 @@ html, body {
     background-color: #FAFAFA44;
 }
 
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #303030 #141414;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #141414;
+  }
+  
+*::-webkit-scrollbar-thumb {
+  background-color: #303030;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
 
 .ñetflix-logo {
     margin-right: 2rem;
@@ -77,6 +95,8 @@ html, body {
 
     width: 100%;
     height: 100%;
+
+    overflow: scroll;
 }
 
 .tree-container {
