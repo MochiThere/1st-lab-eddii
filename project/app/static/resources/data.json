@@ -1,3 +1,20 @@
 {
-    "root": null
+    "root": {
+        "data": {
+            "title": "Billy Elliot",
+            "worldwide": 109280263.0,
+            "domestic": 21995263.0,
+            "domestic_percent": 20.1,
+            "foreign": 87285000.0,
+            "foreign_percent": 79.9,
+            "year": 2000
+        },
+        "balance": 0,
+        "left": null,
+        "right": null,
+        "level": 0,
+        "parent": null,
+        "uncle": null,
+        "grandparent": null
+    }
 }
