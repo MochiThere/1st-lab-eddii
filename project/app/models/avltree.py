@@ -83,11 +83,27 @@ class AVLTree():
                     sus_parent.right = sus_son
                 else:
                     sus_parent.left = sus_son
-                del sus    
-            self.rebalance(self.search(element_key)[1])
-            #self.head(self.count_nodes(self.root))
+                del sus
+                
+            leaves:list[Node] = []
+            self.get_leaves(self.root, leaves)
+            for leaf in leaves:
+                print("leaf: "+leaf.key)
+                self.rebalance(self.search(leaf.key)[0])
             return True
         return False    
+    
+    def get_leaves(self, node:Node, leaves:list[Node]):
+        if (node == None):
+            return
+        if(node.left == None and node.right == None):
+            leaves.append(node)
+        else:
+            if(node.left):
+                self.get_leaves(node.left, leaves)
+            if(node.right):
+                self.get_leaves(node.right, leaves)
+        
     
     def search(self, element_key:str ) -> tuple:
         pointer, parent = self.root, None
@@ -186,8 +202,8 @@ class AVLTree():
             else:
                 print("que haces aqui fred")
                 
-            #reajuste de los balances hijos
-            self.calculate_sub_tree_balance(self.root)
+            #reajuste de los balances hijos (no hay posibilidad de desbalance porque ya se hicieron las rotaciones)
+            self.calculate_sub_tree_balance(aux)
             #reasignar raiz / aux
             if (pointer == self.root):
                 self.root = aux
@@ -196,8 +212,8 @@ class AVLTree():
                     parent.right = aux
                 else:
                     parent.left = aux
+            #recalcular la lista de desbalances
             unbalances = self.calculate_ascendance(pointer)
-        self.calculate_sub_tree_balance(self.root)
             
     def calculate_node_balance (self, node: Node = None) -> int:
         if node is not None:
@@ -279,14 +295,6 @@ class AVLTree():
             
     # Utilidades ======================================================
 
-    def count_nodes(self, node):
-        if node is None:
-            return 0
-        # La cuenta es 1 (nodo actual) más la cantidad de nodos en sus hijos
-        return 1 + self.count_nodes(node.left) + self.count_nodes(node.right)
-            
-            
-        
     def search_and_filter(self, query: str):
         filtered = AVLTree()
 
