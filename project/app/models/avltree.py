@@ -86,7 +86,6 @@ class AVLTree():
                 del sus    
             self.rebalance(self.search(element_key)[1])
             self.head(self.count_nodes(self.root))
-            self.calculate_sub_tree_balance(self.root)
             return True
         return False    
     
@@ -188,7 +187,7 @@ class AVLTree():
                 print("que haces aqui fred")
                 
             #reajuste de los balances hijos
-            self.calculate_sub_tree_balance(pointer)
+            self.calculate_sub_tree_balance(self.root)
             #reasignar raiz / aux
             if (pointer == self.root):
                 self.root = aux

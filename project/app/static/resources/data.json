@@ -1,17 +1,170 @@
 {
     "root": {
         "data": {
-            "title": "17 Again",
-            "worldwide": 136316880.0,
-            "domestic": 64167069.0,
-            "domestic_percent": 47.1,
-            "foreign": 72149811.0,
-            "foreign_percent": 52.9,
-            "year": 2009
+            "title": "Hanbando",
+            "worldwide": 18483140.0,
+            "domestic": 0.0,
+            "domestic_percent": 0.0,
+            "foreign": 18483140.0,
+            "foreign_percent": 100.0,
+            "year": 2006
         },
         "balance": 0,
-        "left": null,
-        "right": null,
+        "left": {
+            "data": {
+                "title": "Bandidas",
+                "worldwide": 18381890.0,
+                "domestic": 0.0,
+                "domestic_percent": 0.0,
+                "foreign": 18381890.0,
+                "foreign_percent": 100.0,
+                "year": 2006
+            },
+            "balance": 1,
+            "left": {
+                "data": {
+                    "title": "Akeelah and the Bee",
+                    "worldwide": 18948425.0,
+                    "domestic": 18848430.0,
+                    "domestic_percent": 99.5,
+                    "foreign": 99995.0,
+                    "foreign_percent": 0.5,
+                    "year": 2006
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Bandidas",
+                "uncle": "Memories of Tomorrow",
+                "grandparent": "Hanbando"
+            },
+            "right": {
+                "data": {
+                    "title": "Flyboys",
+                    "worldwide": 17834865.0,
+                    "domestic": 13090630.0,
+                    "domestic_percent": 73.4,
+                    "foreign": 4744235.0,
+                    "foreign_percent": 26.6,
+                    "year": 2006
+                },
+                "balance": 0,
+                "left": {
+                    "data": {
+                        "title": "Battle of the Warriors",
+                        "worldwide": 17812601.0,
+                        "domestic": 0.0,
+                        "domestic_percent": 0.0,
+                        "foreign": 17812601.0,
+                        "foreign_percent": 100.0,
+                        "year": 2006
+                    },
+                    "balance": 0,
+                    "left": null,
+                    "right": null,
+                    "level": 3,
+                    "parent": "Flyboys",
+                    "uncle": "Akeelah and the Bee",
+                    "grandparent": "Bandidas"
+                },
+                "right": {
+                    "data": {
+                        "title": "Friends with Money",
+                        "worldwide": 18245244.0,
+                        "domestic": 13368437.0,
+                        "domestic_percent": 73.3,
+                        "foreign": 4876807.0,
+                        "foreign_percent": 26.7,
+                        "year": 2006
+                    },
+                    "balance": 0,
+                    "left": null,
+                    "right": null,
+                    "level": 3,
+                    "parent": "Flyboys",
+                    "uncle": "Akeelah and the Bee",
+                    "grandparent": "Bandidas"
+                },
+                "level": 2,
+                "parent": "Bandidas",
+                "uncle": "Memories of Tomorrow",
+                "grandparent": "Hanbando"
+            },
+            "level": 1,
+            "parent": "Hanbando",
+            "uncle": null,
+            "grandparent": null
+        },
+        "right": {
+            "data": {
+                "title": "Memories of Tomorrow",
+                "worldwide": 17696020.0,
+                "domestic": 140200.0,
+                "domestic_percent": 0.8,
+                "foreign": 17555820.0,
+                "foreign_percent": 99.2,
+                "year": 2006
+            },
+            "balance": -1,
+            "left": {
+                "data": {
+                    "title": "Lage Raho Munna Bhai",
+                    "worldwide": 17897527.0,
+                    "domestic": 2217562.0,
+                    "domestic_percent": 12.4,
+                    "foreign": 15679965.0,
+                    "foreign_percent": 87.6,
+                    "year": 2006
+                },
+                "balance": -1,
+                "left": {
+                    "data": {
+                        "title": "Krrish",
+                        "worldwide": 18041250.0,
+                        "domestic": 1430721.0,
+                        "domestic_percent": 7.9,
+                        "foreign": 16610529.0,
+                        "foreign_percent": 92.1,
+                        "year": 2006
+                    },
+                    "balance": 0,
+                    "left": null,
+                    "right": null,
+                    "level": 3,
+                    "parent": "Lage Raho Munna Bhai",
+                    "uncle": "See No Evil",
+                    "grandparent": "Memories of Tomorrow"
+                },
+                "right": null,
+                "level": 2,
+                "parent": "Memories of Tomorrow",
+                "uncle": "Bandidas",
+                "grandparent": "Hanbando"
+            },
+            "right": {
+                "data": {
+                    "title": "See No Evil",
+                    "worldwide": 18564467.0,
+                    "domestic": 15032800.0,
+                    "domestic_percent": 81.0,
+                    "foreign": 3531667.0,
+                    "foreign_percent": 19.0,
+                    "year": 2006
+                },
+                "balance": 0,
+                "left": null,
+                "right": null,
+                "level": 2,
+                "parent": "Memories of Tomorrow",
+                "uncle": "Bandidas",
+                "grandparent": "Hanbando"
+            },
+            "level": 1,
+            "parent": "Hanbando",
+            "uncle": null,
+            "grandparent": null
+        },
         "level": 0,
         "parent": null,
         "uncle": null,
