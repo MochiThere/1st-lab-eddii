@@ -85,7 +85,7 @@ class AVLTree():
                     sus_parent.left = sus_son
                 del sus    
             self.rebalance(self.search(element_key)[1])
-            self.head(self.count_nodes(self.root))
+            #self.head(self.count_nodes(self.root))
             return True
         return False    
     
@@ -197,7 +197,7 @@ class AVLTree():
                 else:
                     parent.left = aux
             unbalances = self.calculate_ascendance(pointer)
-            
+        self.calculate_sub_tree_balance(self.root)
             
     def calculate_node_balance (self, node: Node = None) -> int:
         if node is not None:
